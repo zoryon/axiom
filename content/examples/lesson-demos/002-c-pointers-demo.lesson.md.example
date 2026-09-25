@@ -1,0 +1,61 @@
+---
+{
+  "schemaVersion": 1,
+  "id": "c.pointers-demo",
+  "title": "Pointer Reasoning — Preview",
+  "subtitle": "A second demo showing prerequisites and structured practice",
+  "course": "c-programming",
+  "track": "Computer Science",
+  "module": "Memory Model",
+  "order": 20,
+  "estimatedMinutes": 45,
+  "difficulty": "Foundational",
+  "prerequisites": ["c.machine-model"],
+  "tags": ["c", "pointers"],
+  "objectives": [
+    "Trace a basic indirection operation",
+    "Separate a pointer object from the object it designates"
+  ],
+  "status": "published",
+  "demo": true
+}
+---
+# Pointer reasoning
+
+A pointer object and the object it designates are different objects. That sentence is simple; a surprising amount of confusion disappears once it becomes automatic.
+
+```c
+int x = 10;
+int *p = &x;
+*p = 25;
+```
+
+After the last statement, the stored value of `x` is `25`. The expression `*p` gives access to the designated object.
+
+```quiz
+{
+  "id": "q-pointer-01",
+  "type": "single-choice",
+  "prompt": "After executing the snippet above, what is the value of x?",
+  "options": [
+    {"id":"a","label":"10"},
+    {"id":"b","label":"25"},
+    {"id":"c","label":"The address of p"}
+  ],
+  "answer": "b",
+  "explanation": "p designates x, so assigning through *p changes x."
+}
+```
+
+```exercise
+{
+  "id": "ex-pointer-01",
+  "title": "Write swap without returning either value",
+  "difficulty": "Warm-up",
+  "brief": "Implement void swap(int *a, int *b) and explain every dereference.",
+  "deliverables": ["swap.c", "A short explanation in your study notes"],
+  "constraints": ["No global state", "No array trick"],
+  "starterCode": "void swap(int *a, int *b) {\n    /* your implementation */\n}",
+  "language": "c"
+}
+```

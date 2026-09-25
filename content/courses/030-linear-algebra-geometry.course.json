@@ -1,0 +1,312 @@
+{
+  "schemaVersion": 1,
+  "id": "linear-algebra-geometry",
+  "code": "MATH-111",
+  "label": "Linear Algebra & Analytic Geometry",
+  "track": "Mathematics & Science",
+  "year": 1,
+  "term": "1",
+  "order": 30,
+  "accent": "cobalt",
+  "recommendedHours": 90,
+  "description": "Vectors, matrices, linear systems, vector spaces, linear maps, determinants, eigenvalues and analytic geometry, developed as both mathematical theory and computational machinery.",
+  "prerequisites": [],
+  "outcomes": [
+    "Solve linear systems and interpret the structure of their solution sets.",
+    "Reason with vector spaces, subspaces, bases, dimension and coordinates.",
+    "Represent linear maps by matrices and change between bases.",
+    "Use determinants, eigenvalues and eigenvectors to analyze transformations.",
+    "Connect algebraic objects to geometric lines, planes, distances and projections."
+  ],
+  "assessments": [],
+  "modules": [
+    {
+      "id": "vectors-geometry",
+      "title": "Vectors and Geometry",
+      "description": "",
+      "order": 10,
+      "plannedLessons": [
+        {
+          "id": "linalg.vectors",
+          "title": "Vectors in R² and R³",
+          "order": 10,
+          "estimatedMinutes": 85,
+          "prerequisites": []
+        },
+        {
+          "id": "linalg.dot-product",
+          "title": "Dot Product, Norm and Angle",
+          "order": 20,
+          "estimatedMinutes": 85,
+          "prerequisites": [
+            "linalg.vectors"
+          ]
+        },
+        {
+          "id": "linalg.lines-planes",
+          "title": "Lines, Planes and Parametric Representations",
+          "order": 30,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "linalg.dot-product"
+          ]
+        },
+        {
+          "id": "linalg.projections",
+          "title": "Orthogonality and Projections",
+          "order": 40,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "linalg.lines-planes"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "linear-systems",
+      "title": "Linear Systems",
+      "description": "",
+      "order": 20,
+      "plannedLessons": [
+        {
+          "id": "linalg.systems",
+          "title": "Systems of Linear Equations",
+          "order": 50,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "linalg.projections"
+          ]
+        },
+        {
+          "id": "linalg.matrices",
+          "title": "Matrices and Elementary Operations",
+          "order": 60,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "linalg.systems"
+          ]
+        },
+        {
+          "id": "linalg.gaussian-elimination",
+          "title": "Gaussian Elimination and Row Echelon Form",
+          "order": 70,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "linalg.matrices"
+          ]
+        },
+        {
+          "id": "linalg.solution-structure",
+          "title": "Rank, Free Variables and Solution Structure",
+          "order": 80,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "linalg.gaussian-elimination"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vector-spaces",
+      "title": "Vector Spaces",
+      "description": "",
+      "order": 30,
+      "plannedLessons": [
+        {
+          "id": "linalg.axioms",
+          "title": "Vector Spaces and Subspaces",
+          "order": 90,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "linalg.solution-structure"
+          ]
+        },
+        {
+          "id": "linalg.span-independence",
+          "title": "Span and Linear Independence",
+          "order": 100,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "linalg.axioms"
+          ]
+        },
+        {
+          "id": "linalg.basis-dimension",
+          "title": "Basis and Dimension",
+          "order": 110,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "linalg.span-independence"
+          ]
+        },
+        {
+          "id": "linalg.coordinates",
+          "title": "Coordinates and Change of Basis",
+          "order": 120,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "linalg.basis-dimension"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "linear-maps",
+      "title": "Linear Transformations",
+      "description": "",
+      "order": 40,
+      "plannedLessons": [
+        {
+          "id": "linalg.linear-transformations",
+          "title": "Linear Transformations",
+          "order": 130,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "linalg.coordinates"
+          ]
+        },
+        {
+          "id": "linalg.kernel-image",
+          "title": "Kernel, Image, Rank and Nullity",
+          "order": 140,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "linalg.linear-transformations"
+          ]
+        },
+        {
+          "id": "linalg.matrix-representation",
+          "title": "Matrix Representation of a Linear Map",
+          "order": 150,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "linalg.kernel-image"
+          ]
+        },
+        {
+          "id": "linalg.composition-inverse",
+          "title": "Composition and Invertibility",
+          "order": 160,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "linalg.matrix-representation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "determinants",
+      "title": "Determinants",
+      "description": "",
+      "order": 50,
+      "plannedLessons": [
+        {
+          "id": "linalg.determinant-definition",
+          "title": "Determinants and Their Meaning",
+          "order": 170,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "linalg.composition-inverse"
+          ]
+        },
+        {
+          "id": "linalg.determinant-properties",
+          "title": "Determinant Properties and Computation",
+          "order": 180,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "linalg.determinant-definition"
+          ]
+        },
+        {
+          "id": "linalg.geometric-meaning",
+          "title": "Area, Volume and Orientation",
+          "order": 190,
+          "estimatedMinutes": 85,
+          "prerequisites": [
+            "linalg.determinant-properties"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eigen",
+      "title": "Eigenvalues and Eigenvectors",
+      "description": "",
+      "order": 60,
+      "plannedLessons": [
+        {
+          "id": "linalg.eigenvalues",
+          "title": "Eigenvalues and Eigenvectors",
+          "order": 200,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "linalg.geometric-meaning"
+          ]
+        },
+        {
+          "id": "linalg.diagonalization",
+          "title": "Diagonalization",
+          "order": 210,
+          "estimatedMinutes": 115,
+          "prerequisites": [
+            "linalg.eigenvalues"
+          ]
+        },
+        {
+          "id": "linalg.applications",
+          "title": "Discrete Dynamics and Matrix Powers",
+          "order": 220,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "linalg.diagonalization"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "inner-product",
+      "title": "Inner Product Methods",
+      "description": "",
+      "order": 70,
+      "plannedLessons": [
+        {
+          "id": "linalg.inner-products",
+          "title": "Inner Product Spaces",
+          "order": 230,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "linalg.applications"
+          ]
+        },
+        {
+          "id": "linalg.gram-schmidt",
+          "title": "Gram–Schmidt Orthogonalization",
+          "order": 240,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "linalg.inner-products"
+          ]
+        },
+        {
+          "id": "linalg.least-squares",
+          "title": "Least Squares and Approximation",
+          "order": 250,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "linalg.gram-schmidt"
+          ]
+        },
+        {
+          "id": "linalg.final-synthesis",
+          "title": "Linear Algebra Comprehensive Synthesis",
+          "order": 260,
+          "estimatedMinutes": 140,
+          "prerequisites": [
+            "linalg.least-squares"
+          ]
+        }
+      ]
+    }
+  ]
+}

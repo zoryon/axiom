@@ -1,0 +1,16 @@
+{
+  "name": "axiom-learning-os",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A local-first university-grade learning OS for computer science and software engineering.",
+  "scripts": {
+    "dev": "node --no-warnings --watch server.mjs",
+    "start": "node --no-warnings server.mjs",
+    "test": "node --test",
+    "validate": "node scripts/validate-content.mjs"
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  }
+}

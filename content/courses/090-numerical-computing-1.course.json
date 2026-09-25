@@ -1,0 +1,311 @@
+{
+  "schemaVersion": 1,
+  "id": "numerical-computing-1",
+  "code": "MATH-141",
+  "label": "Numerical Computing I",
+  "track": "Mathematics & Science",
+  "year": 1,
+  "term": "2",
+  "order": 90,
+  "accent": "cobalt",
+  "recommendedHours": 75,
+  "description": "Numerical analysis for computer engineers: floating-point error, root finding, linear systems, interpolation, numerical differentiation/integration and iterative methods implemented as real programs.",
+  "prerequisites": [
+    "calculus-1",
+    "linear-algebra-geometry",
+    "c-programming-1"
+  ],
+  "outcomes": [
+    "Explain floating-point representation, rounding and conditioning.",
+    "Implement and analyze root-finding algorithms.",
+    "Solve linear systems numerically and recognize stability issues.",
+    "Approximate functions, derivatives and integrals with quantified error.",
+    "Separate mathematical error, floating-point error and implementation error."
+  ],
+  "assessments": [],
+  "modules": [
+    {
+      "id": "error",
+      "title": "Computation, Error and Floating Point",
+      "description": "",
+      "order": 10,
+      "plannedLessons": [
+        {
+          "id": "num1.real-vs-machine",
+          "title": "Real Numbers vs Machine Numbers",
+          "order": 10,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "calc1.limit-laws",
+            "linalg.gaussian-elimination",
+            "c1.functions-basics"
+          ]
+        },
+        {
+          "id": "num1.floating-point",
+          "title": "IEEE 754 Floating Point",
+          "order": 20,
+          "estimatedMinutes": 115,
+          "prerequisites": [
+            "num1.real-vs-machine"
+          ]
+        },
+        {
+          "id": "num1.rounding",
+          "title": "Rounding, Cancellation and Error Propagation",
+          "order": 30,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "num1.floating-point"
+          ]
+        },
+        {
+          "id": "num1.conditioning",
+          "title": "Conditioning and Stability",
+          "order": 40,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "num1.rounding"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "roots",
+      "title": "Nonlinear Equations",
+      "description": "",
+      "order": 20,
+      "plannedLessons": [
+        {
+          "id": "num1.bisection",
+          "title": "Bisection Method",
+          "order": 50,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "num1.conditioning"
+          ]
+        },
+        {
+          "id": "num1.newton",
+          "title": "Newton’s Method",
+          "order": 60,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "num1.bisection"
+          ]
+        },
+        {
+          "id": "num1.secant",
+          "title": "Secant Method and Derivative-Free Iteration",
+          "order": 70,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "num1.newton"
+          ]
+        },
+        {
+          "id": "num1.stopping",
+          "title": "Stopping Criteria and Failure Modes",
+          "order": 80,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "num1.secant"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "linear-systems",
+      "title": "Numerical Linear Algebra",
+      "description": "",
+      "order": 30,
+      "plannedLessons": [
+        {
+          "id": "num1.gaussian-numerical",
+          "title": "Gaussian Elimination in Floating Point",
+          "order": 90,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "num1.stopping"
+          ]
+        },
+        {
+          "id": "num1.pivoting",
+          "title": "Pivoting and Numerical Stability",
+          "order": 100,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "num1.gaussian-numerical"
+          ]
+        },
+        {
+          "id": "num1.lu",
+          "title": "LU Factorization",
+          "order": 110,
+          "estimatedMinutes": 115,
+          "prerequisites": [
+            "num1.pivoting"
+          ]
+        },
+        {
+          "id": "num1.iterative-linear",
+          "title": "Jacobi and Gauss–Seidel Iteration",
+          "order": 120,
+          "estimatedMinutes": 115,
+          "prerequisites": [
+            "num1.lu"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "interpolation",
+      "title": "Interpolation and Approximation",
+      "description": "",
+      "order": 40,
+      "plannedLessons": [
+        {
+          "id": "num1.polynomial-interpolation",
+          "title": "Polynomial Interpolation",
+          "order": 130,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "num1.iterative-linear"
+          ]
+        },
+        {
+          "id": "num1.lagrange",
+          "title": "Lagrange Form",
+          "order": 140,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "num1.polynomial-interpolation"
+          ]
+        },
+        {
+          "id": "num1.newton-form",
+          "title": "Newton Divided Differences",
+          "order": 150,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "num1.lagrange"
+          ]
+        },
+        {
+          "id": "num1.interpolation-error",
+          "title": "Interpolation Error and Runge Phenomenon",
+          "order": 160,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "num1.newton-form"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "calculus-numerical",
+      "title": "Numerical Calculus",
+      "description": "",
+      "order": 50,
+      "plannedLessons": [
+        {
+          "id": "num1.finite-differences",
+          "title": "Finite-Difference Derivatives",
+          "order": 170,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "num1.interpolation-error"
+          ]
+        },
+        {
+          "id": "num1.quadrature",
+          "title": "Trapezoidal and Simpson Quadrature",
+          "order": 180,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "num1.finite-differences"
+          ]
+        },
+        {
+          "id": "num1.quadrature-error",
+          "title": "Error Bounds for Numerical Integration",
+          "order": 190,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "num1.quadrature"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iterative-models",
+      "title": "Iterative Thinking",
+      "description": "",
+      "order": 60,
+      "plannedLessons": [
+        {
+          "id": "num1.fixed-point",
+          "title": "Fixed-Point Iteration",
+          "order": 200,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "num1.quadrature-error"
+          ]
+        },
+        {
+          "id": "num1.convergence",
+          "title": "Convergence Rates",
+          "order": 210,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "num1.fixed-point"
+          ]
+        },
+        {
+          "id": "num1.experiment-design",
+          "title": "Designing Numerical Experiments",
+          "order": 220,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "num1.convergence"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "capstone",
+      "title": "Numerical Software Capstone",
+      "description": "",
+      "order": 70,
+      "plannedLessons": [
+        {
+          "id": "num1.library-design",
+          "title": "Designing a Small Numerical Library",
+          "order": 230,
+          "estimatedMinutes": 120,
+          "prerequisites": [
+            "num1.experiment-design"
+          ]
+        },
+        {
+          "id": "num1.validation",
+          "title": "Validating Numerical Software",
+          "order": 240,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "num1.library-design"
+          ]
+        },
+        {
+          "id": "num1.final-project",
+          "title": "Numerical Computing Final Project",
+          "order": 250,
+          "estimatedMinutes": 180,
+          "prerequisites": [
+            "num1.validation"
+          ]
+        }
+      ]
+    }
+  ]
+}

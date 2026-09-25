@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "course-id",
+  "code": "XX-000",
+  "label": "Course Title",
+  "track": "Computer Science",
+  "year": 1,
+  "term": "1",
+  "order": 10,
+  "accent": "signal",
+  "recommendedHours": 80,
+  "description": "Course purpose and scope.",
+  "prerequisites": [],
+  "outcomes": [
+    "A measurable course-level learning outcome."
+  ],
+  "assessments": [],
+  "modules": [
+    {
+      "id": "module-id",
+      "title": "Module Title",
+      "description": "Optional module description.",
+      "order": 10,
+      "plannedLessons": [
+        {
+          "id": "course.lesson-id",
+          "title": "Lesson Title",
+          "order": 10,
+          "estimatedMinutes": 75,
+          "prerequisites": []
+        }
+      ]
+    }
+  ]
+}

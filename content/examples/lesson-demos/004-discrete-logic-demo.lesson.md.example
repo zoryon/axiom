@@ -1,0 +1,48 @@
+---
+{
+  "schemaVersion": 1,
+  "id": "math.logic-preview",
+  "title": "Logic Is a Programming Tool",
+  "subtitle": "Demo of mathematical content in the same learning system",
+  "course": "discrete-math",
+  "track": "Mathematics",
+  "module": "Propositional Logic",
+  "order": 40,
+  "estimatedMinutes": 25,
+  "difficulty": "Foundational",
+  "prerequisites": [],
+  "tags": ["logic", "proofs"],
+  "objectives": [
+    "Read a basic logical implication",
+    "Connect logical structure to program conditions"
+  ],
+  "status": "published",
+  "demo": true
+}
+---
+# Logic as engineering notation
+
+A proposition is a statement that has a truth value. We will eventually use formal logic for proofs, specifications, invariants and reasoning about programs.
+
+```math
+{
+  "label": "Implication",
+  "tex": "P \\Rightarrow Q",
+  "caption": "If P holds, Q must hold for the implication to be true in the intended proof step."
+}
+```
+
+```quiz
+{
+  "id": "q-logic-01",
+  "type": "single-choice",
+  "prompt": "Which expression states that both P and Q hold?",
+  "options": [
+    {"id":"a","label":"P ∧ Q"},
+    {"id":"b","label":"P ∨ Q"},
+    {"id":"c","label":"¬P"}
+  ],
+  "answer": "a",
+  "explanation": "The conjunction P ∧ Q is true exactly when both propositions are true."
+}
+```

@@ -1,0 +1,268 @@
+{
+  "schemaVersion": 1,
+  "id": "developer-tools",
+  "code": "ENG-101",
+  "label": "Linux, Git & Developer Tools",
+  "track": "Software Engineering",
+  "year": 1,
+  "term": "1",
+  "order": 50,
+  "accent": "moss",
+  "recommendedHours": 55,
+  "description": "The working environment of a professional engineer: shell, filesystem, processes, Git, builds, debuggers, testing, documentation and repeatable developer workflows.",
+  "prerequisites": [],
+  "outcomes": [
+    "Work fluently from a Unix-like shell and understand filesystem/process fundamentals.",
+    "Use Git beyond commit/push: branches, history, recovery, rebasing and conflict resolution.",
+    "Build C/Rust projects reproducibly and inspect compiler/linker output.",
+    "Debug with logs, GDB and basic profiling rather than trial-and-error editing.",
+    "Maintain disciplined project structure, documentation and automation."
+  ],
+  "assessments": [],
+  "modules": [
+    {
+      "id": "shell",
+      "title": "Shell and Filesystem",
+      "description": "",
+      "order": 10,
+      "plannedLessons": [
+        {
+          "id": "tools.shell-filesystem",
+          "title": "Shell, Paths and the Filesystem",
+          "order": 10,
+          "estimatedMinutes": 80,
+          "prerequisites": []
+        },
+        {
+          "id": "tools.permissions",
+          "title": "Users, Groups and Permissions",
+          "order": 20,
+          "estimatedMinutes": 80,
+          "prerequisites": [
+            "tools.shell-filesystem"
+          ]
+        },
+        {
+          "id": "tools.pipes-redirection",
+          "title": "Pipes, Redirection and Text Processing",
+          "order": 30,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "tools.permissions"
+          ]
+        },
+        {
+          "id": "tools.shell-scripting",
+          "title": "Shell Scripting Fundamentals",
+          "order": 40,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "tools.pipes-redirection"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "processes",
+      "title": "Processes and the Environment",
+      "description": "",
+      "order": 20,
+      "plannedLessons": [
+        {
+          "id": "tools.processes",
+          "title": "Processes, Exit Codes and Signals",
+          "order": 50,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "tools.shell-scripting"
+          ]
+        },
+        {
+          "id": "tools.environment",
+          "title": "Environment Variables and Process Context",
+          "order": 60,
+          "estimatedMinutes": 80,
+          "prerequisites": [
+            "tools.processes"
+          ]
+        },
+        {
+          "id": "tools.inspection",
+          "title": "Inspecting Processes, Files and Network State",
+          "order": 70,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "tools.environment"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "git",
+      "title": "Git as a Data Model",
+      "description": "",
+      "order": 30,
+      "plannedLessons": [
+        {
+          "id": "tools.git-model",
+          "title": "Commits, Trees, Blobs and References",
+          "order": 80,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "tools.inspection"
+          ]
+        },
+        {
+          "id": "tools.branching",
+          "title": "Branches, Merges and Conflict Resolution",
+          "order": 90,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "tools.git-model"
+          ]
+        },
+        {
+          "id": "tools.rebase-history",
+          "title": "Rebase, Cherry-Pick and History Surgery",
+          "order": 100,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "tools.branching"
+          ]
+        },
+        {
+          "id": "tools.recovery",
+          "title": "Reflog, Bisect and Recovery",
+          "order": 110,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "tools.rebase-history"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "builds",
+      "title": "Build Systems and Project Structure",
+      "description": "",
+      "order": 40,
+      "plannedLessons": [
+        {
+          "id": "tools.make",
+          "title": "Make and Incremental Builds",
+          "order": 120,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "tools.recovery"
+          ]
+        },
+        {
+          "id": "tools.cargo",
+          "title": "Cargo Workflows and Dependency Hygiene",
+          "order": 130,
+          "estimatedMinutes": 85,
+          "prerequisites": [
+            "tools.make"
+          ]
+        },
+        {
+          "id": "tools.linking-tools",
+          "title": "Object Files, Symbols and Linker Inspection Tools",
+          "order": 140,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "tools.cargo"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "debugging",
+      "title": "Debugging and Diagnostics",
+      "description": "",
+      "order": 50,
+      "plannedLessons": [
+        {
+          "id": "tools.gdb-workflow",
+          "title": "GDB Workflow",
+          "order": 150,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "tools.linking-tools"
+          ]
+        },
+        {
+          "id": "tools.sanitizers",
+          "title": "Sanitizers and Dynamic Diagnostics",
+          "order": 160,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "tools.gdb-workflow"
+          ]
+        },
+        {
+          "id": "tools.valgrind",
+          "title": "Memory Diagnostics with Valgrind",
+          "order": 170,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "tools.sanitizers"
+          ]
+        },
+        {
+          "id": "tools.profiling-intro",
+          "title": "Profiling and Performance Measurement Basics",
+          "order": 180,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "tools.valgrind"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "engineering-hygiene",
+      "title": "Engineering Hygiene",
+      "description": "",
+      "order": 60,
+      "plannedLessons": [
+        {
+          "id": "tools.tests-cli",
+          "title": "Command-Line Testing and Repeatability",
+          "order": 190,
+          "estimatedMinutes": 85,
+          "prerequisites": [
+            "tools.profiling-intro"
+          ]
+        },
+        {
+          "id": "tools.documentation",
+          "title": "README, Technical Notes and Reproducible Instructions",
+          "order": 200,
+          "estimatedMinutes": 80,
+          "prerequisites": [
+            "tools.tests-cli"
+          ]
+        },
+        {
+          "id": "tools.automation",
+          "title": "Small Automation Scripts that Remove Manual Work",
+          "order": 210,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "tools.documentation"
+          ]
+        },
+        {
+          "id": "tools.final-workflow",
+          "title": "Integrated Professional Development Workflow",
+          "order": 220,
+          "estimatedMinutes": 120,
+          "prerequisites": [
+            "tools.automation"
+          ]
+        }
+      ]
+    }
+  ]
+}

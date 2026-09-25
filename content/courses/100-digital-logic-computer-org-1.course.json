@@ -1,0 +1,342 @@
+{
+  "schemaVersion": 1,
+  "id": "digital-logic-computer-org-1",
+  "code": "CE-101",
+  "label": "Digital Logic & Computer Organization I",
+  "track": "Computer Engineering",
+  "year": 1,
+  "term": "2",
+  "order": 100,
+  "accent": "moss",
+  "recommendedHours": 95,
+  "description": "From Boolean algebra to the stored-program computer: gates, combinational and sequential circuits, finite-state machines, binary arithmetic, registers, memory, datapaths and a simple instruction-set architecture.",
+  "prerequisites": [
+    "discrete-math-logic-1"
+  ],
+  "outcomes": [
+    "Represent and simplify digital logic using Boolean algebra and truth tables.",
+    "Design combinational and sequential circuits from specifications.",
+    "Explain clocks, state, registers, counters and finite-state machines.",
+    "Build up a conceptual CPU from datapath, control, memory and instruction encoding.",
+    "Trace machine instructions through a simple processor and connect them to C-level behavior."
+  ],
+  "assessments": [],
+  "modules": [
+    {
+      "id": "representation",
+      "title": "Bits and Representation",
+      "description": "",
+      "order": 10,
+      "plannedLessons": [
+        {
+          "id": "digorg.binary",
+          "title": "Binary, Hexadecimal and Positional Representation",
+          "order": 10,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "discrete.boolean-algebra"
+          ]
+        },
+        {
+          "id": "digorg.signed",
+          "title": "Signed Integers and Two’s Complement",
+          "order": 20,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "digorg.binary"
+          ]
+        },
+        {
+          "id": "digorg.fixed-floating",
+          "title": "Fixed-Point and Floating-Point Representation",
+          "order": 30,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "digorg.signed"
+          ]
+        },
+        {
+          "id": "digorg.encoding",
+          "title": "Information Encoding and Bit-Level Operations",
+          "order": 40,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "digorg.fixed-floating"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "boolean-logic",
+      "title": "Boolean Logic and Gates",
+      "description": "",
+      "order": 20,
+      "plannedLessons": [
+        {
+          "id": "digorg.gates",
+          "title": "Logic Gates and Truth Tables",
+          "order": 50,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "digorg.encoding"
+          ]
+        },
+        {
+          "id": "digorg.boolean-laws",
+          "title": "Boolean Algebra for Circuit Simplification",
+          "order": 60,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "digorg.gates"
+          ]
+        },
+        {
+          "id": "digorg.canonical-forms",
+          "title": "Canonical Forms and Logic Minimization",
+          "order": 70,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "digorg.boolean-laws"
+          ]
+        },
+        {
+          "id": "digorg.nand-nor",
+          "title": "Functional Completeness with NAND and NOR",
+          "order": 80,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "digorg.canonical-forms"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "combinational",
+      "title": "Combinational Circuits",
+      "description": "",
+      "order": 30,
+      "plannedLessons": [
+        {
+          "id": "digorg.mux-decoders",
+          "title": "Multiplexers, Decoders and Encoders",
+          "order": 90,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "digorg.nand-nor"
+          ]
+        },
+        {
+          "id": "digorg.adders",
+          "title": "Half Adders, Full Adders and Ripple Carry",
+          "order": 100,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "digorg.mux-decoders"
+          ]
+        },
+        {
+          "id": "digorg.alu",
+          "title": "Arithmetic Logic Unit Design",
+          "order": 110,
+          "estimatedMinutes": 115,
+          "prerequisites": [
+            "digorg.adders"
+          ]
+        },
+        {
+          "id": "digorg.combinational-design",
+          "title": "Systematic Combinational Design",
+          "order": 120,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "digorg.alu"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sequential",
+      "title": "Sequential Logic",
+      "description": "",
+      "order": 40,
+      "plannedLessons": [
+        {
+          "id": "digorg.latches-flipflops",
+          "title": "Latches and Flip-Flops",
+          "order": 130,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "digorg.combinational-design"
+          ]
+        },
+        {
+          "id": "digorg.clocking",
+          "title": "Clocking, Setup, Hold and Timing Intuition",
+          "order": 140,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "digorg.latches-flipflops"
+          ]
+        },
+        {
+          "id": "digorg.registers-counters",
+          "title": "Registers and Counters",
+          "order": 150,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "digorg.clocking"
+          ]
+        },
+        {
+          "id": "digorg.fsm",
+          "title": "Finite-State Machines",
+          "order": 160,
+          "estimatedMinutes": 120,
+          "prerequisites": [
+            "digorg.registers-counters"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "memory",
+      "title": "Memory Organization",
+      "description": "",
+      "order": 50,
+      "plannedLessons": [
+        {
+          "id": "digorg.memory-cells",
+          "title": "From State Elements to Memory Arrays",
+          "order": 170,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "digorg.fsm"
+          ]
+        },
+        {
+          "id": "digorg.ram-rom",
+          "title": "RAM, ROM and Addressing",
+          "order": 180,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "digorg.memory-cells"
+          ]
+        },
+        {
+          "id": "digorg.hierarchy-intro",
+          "title": "Why Memory Hierarchies Exist",
+          "order": 190,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "digorg.ram-rom"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "processor",
+      "title": "A Minimal Processor",
+      "description": "",
+      "order": 60,
+      "plannedLessons": [
+        {
+          "id": "digorg.isa",
+          "title": "Instruction Set Architecture: The Hardware/Software Contract",
+          "order": 200,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "digorg.hierarchy-intro"
+          ]
+        },
+        {
+          "id": "digorg.datapath",
+          "title": "Datapath: Registers, ALU and Buses",
+          "order": 210,
+          "estimatedMinutes": 120,
+          "prerequisites": [
+            "digorg.isa"
+          ]
+        },
+        {
+          "id": "digorg.control",
+          "title": "Control Unit and Instruction Execution",
+          "order": 220,
+          "estimatedMinutes": 120,
+          "prerequisites": [
+            "digorg.datapath"
+          ]
+        },
+        {
+          "id": "digorg.machine-cycle",
+          "title": "Fetch, Decode, Execute",
+          "order": 230,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "digorg.control"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "assembly-bridge",
+      "title": "Assembly Bridge",
+      "description": "",
+      "order": 70,
+      "plannedLessons": [
+        {
+          "id": "digorg.encoding-instructions",
+          "title": "Encoding Instructions into Bits",
+          "order": 240,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "digorg.machine-cycle"
+          ]
+        },
+        {
+          "id": "digorg.register-machine",
+          "title": "Reasoning about a Register Machine",
+          "order": 250,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "digorg.encoding-instructions"
+          ]
+        },
+        {
+          "id": "digorg.c-to-machine",
+          "title": "Tracing Simple C Constructs toward Machine Operations",
+          "order": 260,
+          "estimatedMinutes": 120,
+          "prerequisites": [
+            "digorg.register-machine"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "capstone",
+      "title": "Digital System Capstone",
+      "description": "",
+      "order": 80,
+      "plannedLessons": [
+        {
+          "id": "digorg.cpu-simulator",
+          "title": "Build a Tiny CPU Simulator",
+          "order": 270,
+          "estimatedMinutes": 180,
+          "prerequisites": [
+            "digorg.c-to-machine"
+          ]
+        },
+        {
+          "id": "digorg.architecture-synthesis",
+          "title": "Computer Organization I Synthesis",
+          "order": 280,
+          "estimatedMinutes": 140,
+          "prerequisites": [
+            "digorg.cpu-simulator"
+          ]
+        }
+      ]
+    }
+  ]
+}

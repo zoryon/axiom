@@ -1,0 +1,360 @@
+{
+  "schemaVersion": 1,
+  "id": "rust-foundations",
+  "code": "RS-101",
+  "label": "Rust Foundations & Safe Systems Programming",
+  "track": "Computer Science",
+  "year": 1,
+  "term": "2",
+  "order": 80,
+  "accent": "oxide",
+  "recommendedHours": 90,
+  "description": "Rust taught after exposure to C’s failure modes: ownership, borrowing, lifetimes, enums, traits, errors, iterators and safe systems programming with explicit comparisons to C.",
+  "prerequisites": [
+    "c-programming-1"
+  ],
+  "outcomes": [
+    "Explain ownership and borrowing as compile-time models of resource lifetime and aliasing.",
+    "Write idiomatic Rust using enums, pattern matching, Result, Option, traits and iterators.",
+    "Relate Rust safety rules to concrete classes of C memory errors.",
+    "Design small reusable crates with clear APIs and test coverage.",
+    "Understand when unsafe code is necessary and what invariants it must preserve."
+  ],
+  "assessments": [],
+  "modules": [
+    {
+      "id": "language-model",
+      "title": "Rust’s Compilation and Type Model",
+      "description": "",
+      "order": 10,
+      "plannedLessons": [
+        {
+          "id": "rust1.toolchain",
+          "title": "rustc, Cargo and the Compilation Model",
+          "order": 10,
+          "estimatedMinutes": 85,
+          "prerequisites": [
+            "c1.memory-model-intro"
+          ]
+        },
+        {
+          "id": "rust1.bindings-types",
+          "title": "Bindings, Mutability and Core Types",
+          "order": 20,
+          "estimatedMinutes": 85,
+          "prerequisites": [
+            "rust1.toolchain"
+          ]
+        },
+        {
+          "id": "rust1.expressions-control",
+          "title": "Expressions and Control Flow",
+          "order": 30,
+          "estimatedMinutes": 80,
+          "prerequisites": [
+            "rust1.bindings-types"
+          ]
+        },
+        {
+          "id": "rust1.functions-modules",
+          "title": "Functions, Modules and Visibility",
+          "order": 40,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "rust1.expressions-control"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ownership",
+      "title": "Ownership",
+      "description": "",
+      "order": 20,
+      "plannedLessons": [
+        {
+          "id": "rust1.ownership-model",
+          "title": "Ownership and Move Semantics",
+          "order": 50,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "rust1.functions-modules"
+          ]
+        },
+        {
+          "id": "rust1.copy-clone",
+          "title": "Copy, Clone and Explicit Duplication",
+          "order": 60,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "rust1.ownership-model"
+          ]
+        },
+        {
+          "id": "rust1.drop-raii",
+          "title": "Drop, RAII and Deterministic Cleanup",
+          "order": 70,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "rust1.copy-clone"
+          ]
+        },
+        {
+          "id": "rust1.ownership-c",
+          "title": "Comparing Rust Ownership with C Resource Conventions",
+          "order": 80,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "rust1.drop-raii"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "borrowing",
+      "title": "Borrowing and References",
+      "description": "",
+      "order": 30,
+      "plannedLessons": [
+        {
+          "id": "rust1.shared-borrows",
+          "title": "Shared References and Aliasing",
+          "order": 90,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "rust1.ownership-c"
+          ]
+        },
+        {
+          "id": "rust1.mutable-borrows",
+          "title": "Mutable References and Exclusivity",
+          "order": 100,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "rust1.shared-borrows"
+          ]
+        },
+        {
+          "id": "rust1.slices",
+          "title": "Slices and Views into Contiguous Data",
+          "order": 110,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "rust1.mutable-borrows"
+          ]
+        },
+        {
+          "id": "rust1.borrow-checker",
+          "title": "Reading Borrow-Checker Errors as Proof Failures",
+          "order": 120,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "rust1.slices"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lifetimes",
+      "title": "Lifetimes",
+      "description": "",
+      "order": 40,
+      "plannedLessons": [
+        {
+          "id": "rust1.lifetime-intuition",
+          "title": "Lifetime Reasoning without Syntax",
+          "order": 130,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "rust1.borrow-checker"
+          ]
+        },
+        {
+          "id": "rust1.lifetime-annotations",
+          "title": "Lifetime Annotations",
+          "order": 140,
+          "estimatedMinutes": 115,
+          "prerequisites": [
+            "rust1.lifetime-intuition"
+          ]
+        },
+        {
+          "id": "rust1.struct-lifetimes",
+          "title": "References inside Structs",
+          "order": 150,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "rust1.lifetime-annotations"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "algebraic-data",
+      "title": "Enums and Pattern Matching",
+      "description": "",
+      "order": 50,
+      "plannedLessons": [
+        {
+          "id": "rust1.enums",
+          "title": "Enums as Sum Types",
+          "order": 160,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "rust1.struct-lifetimes"
+          ]
+        },
+        {
+          "id": "rust1.option",
+          "title": "Option and the Elimination of Null as Default",
+          "order": 170,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "rust1.enums"
+          ]
+        },
+        {
+          "id": "rust1.result",
+          "title": "Result and Typed Failure",
+          "order": 180,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "rust1.option"
+          ]
+        },
+        {
+          "id": "rust1.pattern-matching",
+          "title": "Pattern Matching and Exhaustiveness",
+          "order": 190,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "rust1.result"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "collections-iterators",
+      "title": "Collections and Iterators",
+      "description": "",
+      "order": 60,
+      "plannedLessons": [
+        {
+          "id": "rust1.vec-string",
+          "title": "Vec, String and Owned Collections",
+          "order": 200,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "rust1.pattern-matching"
+          ]
+        },
+        {
+          "id": "rust1.hashmap",
+          "title": "HashMap and Ownership of Keys/Values",
+          "order": 210,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "rust1.vec-string"
+          ]
+        },
+        {
+          "id": "rust1.iterators",
+          "title": "Iterator Model and Lazy Pipelines",
+          "order": 220,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "rust1.hashmap"
+          ]
+        },
+        {
+          "id": "rust1.closures",
+          "title": "Closures and Captures",
+          "order": 230,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "rust1.iterators"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "traits-generics",
+      "title": "Traits and Generic Programming",
+      "description": "",
+      "order": 70,
+      "plannedLessons": [
+        {
+          "id": "rust1.generics",
+          "title": "Generics and Monomorphization",
+          "order": 240,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "rust1.closures"
+          ]
+        },
+        {
+          "id": "rust1.traits",
+          "title": "Traits and Behavioral Abstraction",
+          "order": 250,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "rust1.generics"
+          ]
+        },
+        {
+          "id": "rust1.trait-objects",
+          "title": "Trait Objects and Dynamic Dispatch",
+          "order": 260,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "rust1.traits"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "engineering-rust",
+      "title": "Engineering with Rust",
+      "description": "",
+      "order": 80,
+      "plannedLessons": [
+        {
+          "id": "rust1.testing",
+          "title": "Rust Testing and Documentation Tests",
+          "order": 270,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "rust1.trait-objects"
+          ]
+        },
+        {
+          "id": "rust1.errors",
+          "title": "Error Design and Propagation",
+          "order": 280,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "rust1.testing"
+          ]
+        },
+        {
+          "id": "rust1.unsafe",
+          "title": "Unsafe Rust and Safety Invariants",
+          "order": 290,
+          "estimatedMinutes": 115,
+          "prerequisites": [
+            "rust1.errors"
+          ]
+        },
+        {
+          "id": "rust1.capstone",
+          "title": "Rust Systems Utility Capstone",
+          "order": 300,
+          "estimatedMinutes": 170,
+          "prerequisites": [
+            "rust1.unsafe"
+          ]
+        }
+      ]
+    }
+  ]
+}

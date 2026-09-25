@@ -1,0 +1,393 @@
+{
+  "schemaVersion": 1,
+  "id": "c-programming-1",
+  "code": "CS-101",
+  "label": "C Programming I",
+  "track": "Computer Science",
+  "year": 1,
+  "term": "1",
+  "order": 10,
+  "accent": "signal",
+  "recommendedHours": 95,
+  "description": "Programming from first principles in C: precise control flow, data representation, functions, arrays, pointers, compilation, debugging and the beginnings of a machine-level mental model.",
+  "prerequisites": [],
+  "outcomes": [
+    "Write, compile, test and debug non-trivial C programs without relying on framework abstractions.",
+    "Reason about objects, addresses, arrays, strings, pointers and function calls with a concrete memory model.",
+    "Use decomposition, invariants and defensive input handling to turn problem statements into reliable programs.",
+    "Read compiler diagnostics and debugger state rather than treating errors as opaque failures.",
+    "Explain the boundary between source code, compiler, linker, executable and process."
+  ],
+  "assessments": [
+    {
+      "id": "c1-midterm",
+      "title": "Programming Fundamentals Midterm",
+      "type": "exam",
+      "weight": 25
+    },
+    {
+      "id": "c1-practical",
+      "title": "C Practical Assessment",
+      "type": "practical",
+      "weight": 35
+    },
+    {
+      "id": "c1-final",
+      "title": "C Programming I Final",
+      "type": "exam",
+      "weight": 40
+    }
+  ],
+  "modules": [
+    {
+      "id": "machine-and-toolchain",
+      "title": "The Program and the Machine",
+      "description": "",
+      "order": 10,
+      "plannedLessons": [
+        {
+          "id": "c1.what-a-program-is",
+          "title": "What a Program Is — Source, Translation and Execution",
+          "order": 10,
+          "estimatedMinutes": 80,
+          "prerequisites": []
+        },
+        {
+          "id": "c1.toolchain",
+          "title": "Compiler, Assembler, Linker and Loader",
+          "order": 20,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "c1.what-a-program-is"
+          ]
+        },
+        {
+          "id": "c1.first-programs",
+          "title": "Building and Running Small C Programs",
+          "order": 30,
+          "estimatedMinutes": 75,
+          "prerequisites": [
+            "c1.toolchain"
+          ]
+        },
+        {
+          "id": "c1.diagnostics",
+          "title": "Warnings, Errors and Reading Diagnostics",
+          "order": 40,
+          "estimatedMinutes": 70,
+          "prerequisites": [
+            "c1.first-programs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "values-and-representation",
+      "title": "Values, Types and Representation",
+      "description": "",
+      "order": 20,
+      "plannedLessons": [
+        {
+          "id": "c1.integers",
+          "title": "Integer Types, Ranges and Signedness",
+          "order": 50,
+          "estimatedMinutes": 85,
+          "prerequisites": [
+            "c1.diagnostics"
+          ]
+        },
+        {
+          "id": "c1.floating-point-intro",
+          "title": "Floating-Point Representation: First Principles",
+          "order": 60,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "c1.integers"
+          ]
+        },
+        {
+          "id": "c1.expressions",
+          "title": "Expressions, Operators and Conversions",
+          "order": 70,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "c1.floating-point-intro"
+          ]
+        },
+        {
+          "id": "c1.undefined-behavior-intro",
+          "title": "Defined, Implementation-Defined and Undefined Behavior",
+          "order": 80,
+          "estimatedMinutes": 85,
+          "prerequisites": [
+            "c1.expressions"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "control-flow",
+      "title": "Control Flow and Program Reasoning",
+      "description": "",
+      "order": 30,
+      "plannedLessons": [
+        {
+          "id": "c1.conditionals",
+          "title": "Conditionals and Boolean Reasoning",
+          "order": 90,
+          "estimatedMinutes": 70,
+          "prerequisites": [
+            "c1.undefined-behavior-intro"
+          ]
+        },
+        {
+          "id": "c1.loops",
+          "title": "Loops, Iteration and Loop Invariants",
+          "order": 100,
+          "estimatedMinutes": 85,
+          "prerequisites": [
+            "c1.conditionals"
+          ]
+        },
+        {
+          "id": "c1.state-tracing",
+          "title": "Tracing State by Hand",
+          "order": 110,
+          "estimatedMinutes": 70,
+          "prerequisites": [
+            "c1.loops"
+          ]
+        },
+        {
+          "id": "c1.problem-decomposition",
+          "title": "Decomposing Problems into Executable Steps",
+          "order": 120,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "c1.state-tracing"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "functions",
+      "title": "Functions and Modularity",
+      "description": "",
+      "order": 40,
+      "plannedLessons": [
+        {
+          "id": "c1.functions-basics",
+          "title": "Functions, Parameters and Return Values",
+          "order": 130,
+          "estimatedMinutes": 80,
+          "prerequisites": [
+            "c1.problem-decomposition"
+          ]
+        },
+        {
+          "id": "c1.scope-storage-duration",
+          "title": "Scope, Lifetime and Storage Duration",
+          "order": 140,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "c1.functions-basics"
+          ]
+        },
+        {
+          "id": "c1.headers-translation-units",
+          "title": "Headers, Translation Units and Interfaces",
+          "order": 150,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "c1.scope-storage-duration"
+          ]
+        },
+        {
+          "id": "c1.design-by-contract",
+          "title": "Preconditions, Postconditions and Defensive Interfaces",
+          "order": 160,
+          "estimatedMinutes": 80,
+          "prerequisites": [
+            "c1.headers-translation-units"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "arrays-and-text",
+      "title": "Arrays, Strings and Contiguous Memory",
+      "description": "",
+      "order": 50,
+      "plannedLessons": [
+        {
+          "id": "c1.arrays",
+          "title": "Arrays and Contiguous Storage",
+          "order": 170,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "c1.design-by-contract"
+          ]
+        },
+        {
+          "id": "c1.strings",
+          "title": "C Strings and Null Termination",
+          "order": 180,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "c1.arrays"
+          ]
+        },
+        {
+          "id": "c1.array-algorithms",
+          "title": "Searching, Counting and Transforming Arrays",
+          "order": 190,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "c1.strings"
+          ]
+        },
+        {
+          "id": "c1.bounds",
+          "title": "Bounds, Off-by-One Errors and Memory Discipline",
+          "order": 200,
+          "estimatedMinutes": 85,
+          "prerequisites": [
+            "c1.array-algorithms"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pointers",
+      "title": "Pointers and Indirection",
+      "description": "",
+      "order": 60,
+      "plannedLessons": [
+        {
+          "id": "c1.memory-model-intro",
+          "title": "Addresses, Objects and the Memory Model",
+          "order": 210,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "c1.bounds"
+          ]
+        },
+        {
+          "id": "c1.pointer-basics",
+          "title": "Pointer Types, Address-Of and Dereferencing",
+          "order": 220,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "c1.memory-model-intro"
+          ]
+        },
+        {
+          "id": "c1.pointer-arithmetic",
+          "title": "Pointer Arithmetic and Array Relationships",
+          "order": 230,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "c1.pointer-basics"
+          ]
+        },
+        {
+          "id": "c1.pointers-functions",
+          "title": "Pointers as Function Parameters",
+          "order": 240,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "c1.pointer-arithmetic"
+          ]
+        },
+        {
+          "id": "c1.pointer-safety",
+          "title": "Null, Dangling and Invalid Pointers",
+          "order": 250,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "c1.pointers-functions"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "structured-data",
+      "title": "Structured Data",
+      "description": "",
+      "order": 70,
+      "plannedLessons": [
+        {
+          "id": "c1.structs",
+          "title": "Structures and Aggregate Data",
+          "order": 260,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "c1.pointer-safety"
+          ]
+        },
+        {
+          "id": "c1.enums-unions",
+          "title": "Enumerations, Unions and Tagged Representations",
+          "order": 270,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "c1.structs"
+          ]
+        },
+        {
+          "id": "c1.nested-data",
+          "title": "Nested Structures, Arrays and Pointers",
+          "order": 280,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "c1.enums-unions"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "files-debugging-integration",
+      "title": "Files, Debugging and Integration",
+      "description": "",
+      "order": 80,
+      "plannedLessons": [
+        {
+          "id": "c1.files-io",
+          "title": "Files, Streams and Text I/O",
+          "order": 290,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "c1.nested-data"
+          ]
+        },
+        {
+          "id": "c1.debugger",
+          "title": "Debugging with GDB: Breakpoints, Stack and State",
+          "order": 300,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "c1.files-io"
+          ]
+        },
+        {
+          "id": "c1.testing-basics",
+          "title": "Testing C Programs and Designing Test Cases",
+          "order": 310,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "c1.debugger"
+          ]
+        },
+        {
+          "id": "c1.final-integration",
+          "title": "Integrated C Program: Design, Debug and Explain",
+          "order": 320,
+          "estimatedMinutes": 150,
+          "prerequisites": [
+            "c1.testing-basics"
+          ]
+        }
+      ]
+    }
+  ]
+}

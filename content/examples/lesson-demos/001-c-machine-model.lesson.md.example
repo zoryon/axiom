@@ -1,0 +1,97 @@
+---
+{
+  "schemaVersion": 1,
+  "id": "c.machine-model",
+  "title": "The Machine Beneath C",
+  "subtitle": "A demo lesson proving the content pipeline",
+  "course": "c-programming",
+  "track": "Computer Science",
+  "module": "Foundations",
+  "order": 10,
+  "estimatedMinutes": 35,
+  "difficulty": "Foundational",
+  "prerequisites": [],
+  "tags": ["c", "memory", "compiler"],
+  "objectives": [
+    "Distinguish source code from the abstract machine C defines",
+    "Reason about object representation at a basic level",
+    "Use the lesson reader, quiz and task system"
+  ],
+  "status": "published",
+  "demo": true
+}
+---
+# Before syntax, a model
+
+This is intentionally a **short demo lesson**. It exists so the application can be tested before the full curriculum is written.
+
+C is often introduced as a collection of syntax rules. For this curriculum, that is not enough. We will treat every program as a claim about **objects, values, storage, lifetime and permitted operations**.
+
+```callout
+{
+  "tone": "important",
+  "title": "Course principle",
+  "body": "Do not memorize a C expression before you can explain what objects it reads or changes, when those objects exist, and which assumptions make the operation valid."
+}
+```
+
+## Source is not execution
+
+Consider the following program.
+
+```c
+int main(void) {
+    int x = 42;
+    int *p = &x;
+    *p += 1;
+    return x == 43 ? 0 : 1;
+}
+```
+
+At the source level we can already identify an integer object `x`, a pointer object `p`, the address-of operation, and an access through indirection. Later lessons would connect these concepts to compiler transformations, the C abstract machine, actual memory, ABI conventions and generated machine code.
+
+| Layer | Question |
+| --- | --- |
+| C language | Is the program defined by the language rules? |
+| Compiler | What transformations are legal? |
+| ABI | How are values represented for this target? |
+| Hardware | Which instructions and memory accesses occur? |
+
+```memory
+{
+  "title": "Illustrative layout — not a language guarantee",
+  "rows": [
+    {"address":"0x7fff...a0","bytes":"2A 00 00 00","label":"x = 42"},
+    {"address":"0x7fff...a8","bytes":"A0 ...","label":"p designates x"}
+  ]
+}
+```
+
+> A future full lesson will be much longer than this demo and will distinguish carefully between what C guarantees and what a particular machine merely tends to do.
+
+```quiz
+{
+  "id": "q-machine-01",
+  "type": "single-choice",
+  "prompt": "Which statement is the safest starting point when reasoning about portable C?",
+  "options": [
+    {"id":"a","label":"Every C variable is always a visible RAM slot"},
+    {"id":"b","label":"The C language defines semantics; a compiler may realize them in different machine-level ways"},
+    {"id":"c","label":"A pointer is simply an unsigned integer"}
+  ],
+  "answer": "b",
+  "explanation": "Portable reasoning starts from the language semantics. Concrete addresses, registers and instruction sequences depend on implementation and optimization choices."
+}
+```
+
+```task
+{
+  "id": "task-machine-01",
+  "title": "Explain the four layers",
+  "detail": "In your own notes, write one sentence for language semantics, compiler, ABI and hardware. Do not copy the table."
+}
+```
+
+## Transfer question
+
+If an optimizer removes an apparent memory write, does that automatically mean the compiler violated the source program? Explain what information you would need before answering.

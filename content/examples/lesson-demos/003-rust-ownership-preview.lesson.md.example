@@ -1,0 +1,41 @@
+---
+{
+  "schemaVersion": 1,
+  "id": "rust.ownership-preview",
+  "title": "Ownership as a Design Constraint",
+  "subtitle": "Demo bridge from C memory reasoning to Rust",
+  "course": "rust-foundations",
+  "track": "Computer Science",
+  "module": "Ownership",
+  "order": 30,
+  "estimatedMinutes": 30,
+  "difficulty": "Foundational",
+  "prerequisites": ["c.machine-model"],
+  "tags": ["rust", "ownership"],
+  "objectives": [
+    "Recognize ownership as a static restriction over resource use",
+    "Connect Rust questions to memory-lifetime questions learned in C"
+  ],
+  "status": "published",
+  "demo": true
+}
+---
+# Why study C first?
+
+Rust becomes more interesting when ownership is not treated as arbitrary compiler ceremony. It is a way of making classes of resource-lifetime mistakes harder to express.
+
+```rust
+let s = String::from("axiom");
+let t = s;
+// println!("{s}"); // use after move
+```
+
+The future curriculum will compare this with explicit ownership conventions in C, rather than presenting Rust in isolation.
+
+```callout
+{
+  "tone": "note",
+  "title": "Comparative method",
+  "body": "C will often expose the failure mode first. Rust will then show a language-level strategy for ruling out or structuring that failure mode."
+}
+```

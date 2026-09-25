@@ -1,0 +1,351 @@
+{
+  "schemaVersion": 1,
+  "id": "c-programming-2",
+  "code": "CS-102",
+  "label": "C Programming II — Memory & Data Structures",
+  "track": "Computer Science",
+  "year": 1,
+  "term": "2",
+  "order": 70,
+  "accent": "signal",
+  "recommendedHours": 115,
+  "description": "Deeper C and algorithmic programming: dynamic memory, ownership conventions, generic data structures, recursion, files, modularity, testing and performance-conscious implementation.",
+  "prerequisites": [
+    "c-programming-1"
+  ],
+  "outcomes": [
+    "Design explicit ownership conventions and manage dynamic memory without leaks or lifetime errors.",
+    "Implement core data structures from scratch and analyze their operational costs.",
+    "Use recursion, function pointers and opaque interfaces appropriately.",
+    "Build multi-file C programs with strong invariants, tests and error handling.",
+    "Diagnose memory corruption, undefined behavior and performance problems systematically."
+  ],
+  "assessments": [],
+  "modules": [
+    {
+      "id": "dynamic-memory",
+      "title": "Dynamic Memory and Ownership",
+      "description": "",
+      "order": 10,
+      "plannedLessons": [
+        {
+          "id": "c2.heap-model",
+          "title": "The Heap, Allocation and Lifetime",
+          "order": 10,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "c1.final-integration"
+          ]
+        },
+        {
+          "id": "c2.malloc-free",
+          "title": "malloc, calloc, realloc and free",
+          "order": 20,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "c2.heap-model"
+          ]
+        },
+        {
+          "id": "c2.ownership-conventions",
+          "title": "Ownership, Borrowing Conventions and API Contracts in C",
+          "order": 30,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "c2.malloc-free"
+          ]
+        },
+        {
+          "id": "c2.memory-failures",
+          "title": "Leaks, Double Free, Use-After-Free and Corruption",
+          "order": 40,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "c2.ownership-conventions"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dynamic-sequences",
+      "title": "Dynamic Sequences",
+      "description": "",
+      "order": 20,
+      "plannedLessons": [
+        {
+          "id": "c2.dynamic-array",
+          "title": "Designing a Dynamic Array",
+          "order": 50,
+          "estimatedMinutes": 120,
+          "prerequisites": [
+            "c2.memory-failures"
+          ]
+        },
+        {
+          "id": "c2.amortized-growth",
+          "title": "Capacity Growth and Amortized Reasoning",
+          "order": 60,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "c2.dynamic-array"
+          ]
+        },
+        {
+          "id": "c2.strings-buffers",
+          "title": "Owned Strings and Byte Buffers",
+          "order": 70,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "c2.amortized-growth"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "linked-structures",
+      "title": "Linked Structures",
+      "description": "",
+      "order": 30,
+      "plannedLessons": [
+        {
+          "id": "c2.linked-list",
+          "title": "Singly Linked Lists",
+          "order": 80,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "c2.strings-buffers"
+          ]
+        },
+        {
+          "id": "c2.doubly-linked",
+          "title": "Doubly Linked Lists and Invariants",
+          "order": 90,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "c2.linked-list"
+          ]
+        },
+        {
+          "id": "c2.stack-queue",
+          "title": "Stacks, Queues and Deques",
+          "order": 100,
+          "estimatedMinutes": 115,
+          "prerequisites": [
+            "c2.doubly-linked"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "recursion-trees",
+      "title": "Recursion and Trees",
+      "description": "",
+      "order": 40,
+      "plannedLessons": [
+        {
+          "id": "c2.recursion-model",
+          "title": "Recursion and the Call Stack",
+          "order": 110,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "c2.stack-queue"
+          ]
+        },
+        {
+          "id": "c2.binary-trees",
+          "title": "Binary Trees",
+          "order": 120,
+          "estimatedMinutes": 115,
+          "prerequisites": [
+            "c2.recursion-model"
+          ]
+        },
+        {
+          "id": "c2.bst",
+          "title": "Binary Search Trees",
+          "order": 130,
+          "estimatedMinutes": 120,
+          "prerequisites": [
+            "c2.binary-trees"
+          ]
+        },
+        {
+          "id": "c2.tree-traversal",
+          "title": "Recursive and Iterative Tree Traversal",
+          "order": 140,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "c2.bst"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hashing",
+      "title": "Hash Tables",
+      "description": "",
+      "order": 50,
+      "plannedLessons": [
+        {
+          "id": "c2.hash-functions",
+          "title": "Hash Functions and Key Representation",
+          "order": 150,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "c2.tree-traversal"
+          ]
+        },
+        {
+          "id": "c2.hash-table-chaining",
+          "title": "Hash Tables with Separate Chaining",
+          "order": 160,
+          "estimatedMinutes": 125,
+          "prerequisites": [
+            "c2.hash-functions"
+          ]
+        },
+        {
+          "id": "c2.open-addressing",
+          "title": "Open Addressing and Tombstones",
+          "order": 170,
+          "estimatedMinutes": 125,
+          "prerequisites": [
+            "c2.hash-table-chaining"
+          ]
+        },
+        {
+          "id": "c2.load-factor",
+          "title": "Load Factor, Resizing and Performance",
+          "order": 180,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "c2.open-addressing"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "interfaces-genericity",
+      "title": "Interfaces and Generic Techniques",
+      "description": "",
+      "order": 60,
+      "plannedLessons": [
+        {
+          "id": "c2.function-pointers",
+          "title": "Function Pointers and Callbacks",
+          "order": 190,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "c2.load-factor"
+          ]
+        },
+        {
+          "id": "c2.void-pointers",
+          "title": "void*, Generic Containers and Type Trade-Offs",
+          "order": 200,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "c2.function-pointers"
+          ]
+        },
+        {
+          "id": "c2.opaque-types",
+          "title": "Opaque Types and Encapsulation in C",
+          "order": 210,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "c2.void-pointers"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "robust-programs",
+      "title": "Robust Systems-Style Programs",
+      "description": "",
+      "order": 70,
+      "plannedLessons": [
+        {
+          "id": "c2.error-models",
+          "title": "Error Codes, errno and Failure Propagation",
+          "order": 220,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "c2.opaque-types"
+          ]
+        },
+        {
+          "id": "c2.binary-io",
+          "title": "Binary Files and Serialization Fundamentals",
+          "order": 230,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "c2.error-models"
+          ]
+        },
+        {
+          "id": "c2.parsing",
+          "title": "Parsing Structured Input Safely",
+          "order": 240,
+          "estimatedMinutes": 120,
+          "prerequisites": [
+            "c2.binary-io"
+          ]
+        },
+        {
+          "id": "c2.resource-cleanup",
+          "title": "Structured Cleanup and Failure Paths",
+          "order": 250,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "c2.parsing"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "quality-performance",
+      "title": "Correctness, Testing and Performance",
+      "description": "",
+      "order": 80,
+      "plannedLessons": [
+        {
+          "id": "c2.unit-testing",
+          "title": "Unit and Property-Oriented Testing in C",
+          "order": 260,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "c2.resource-cleanup"
+          ]
+        },
+        {
+          "id": "c2.sanitizers-deep",
+          "title": "Sanitizers for Memory and Undefined Behavior",
+          "order": 270,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "c2.unit-testing"
+          ]
+        },
+        {
+          "id": "c2.profiling",
+          "title": "Measuring CPU and Memory Cost",
+          "order": 280,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "c2.sanitizers-deep"
+          ]
+        },
+        {
+          "id": "c2.capstone",
+          "title": "C Data-Structure Library Capstone",
+          "order": 290,
+          "estimatedMinutes": 180,
+          "prerequisites": [
+            "c2.profiling"
+          ]
+        }
+      ]
+    }
+  ]
+}

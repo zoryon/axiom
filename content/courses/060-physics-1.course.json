@@ -1,0 +1,303 @@
+{
+  "schemaVersion": 1,
+  "id": "physics-1",
+  "code": "PHYS-101",
+  "label": "Physics I — Mechanics",
+  "track": "Mathematics & Science",
+  "year": 1,
+  "term": "1",
+  "order": 60,
+  "accent": "oxide",
+  "recommendedHours": 85,
+  "description": "Calculus-based classical mechanics with vectors, kinematics, Newtonian dynamics, energy, momentum, rotation and oscillation, emphasizing mathematical modeling and dimensional reasoning.",
+  "prerequisites": [],
+  "outcomes": [
+    "Translate physical situations into mathematical models with correct units and assumptions.",
+    "Solve one- and multi-dimensional kinematics problems using vectors and calculus.",
+    "Apply Newton’s laws, conservation of energy and conservation of momentum.",
+    "Analyze rotational motion and simple oscillatory systems.",
+    "Use estimation, dimensional analysis and uncertainty-aware reasoning."
+  ],
+  "assessments": [],
+  "modules": [
+    {
+      "id": "measurement-vectors",
+      "title": "Measurement, Units and Vectors",
+      "description": "",
+      "order": 10,
+      "plannedLessons": [
+        {
+          "id": "phys1.measurement",
+          "title": "Physical Quantities, SI Units and Dimensional Analysis",
+          "order": 10,
+          "estimatedMinutes": 90,
+          "prerequisites": []
+        },
+        {
+          "id": "phys1.vectors",
+          "title": "Vectors, Components and Coordinate Systems",
+          "order": 20,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "phys1.measurement"
+          ]
+        },
+        {
+          "id": "phys1.estimation",
+          "title": "Estimation, Significant Figures and Model Assumptions",
+          "order": 30,
+          "estimatedMinutes": 80,
+          "prerequisites": [
+            "phys1.vectors"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kinematics",
+      "title": "Kinematics",
+      "description": "",
+      "order": 20,
+      "plannedLessons": [
+        {
+          "id": "phys1.motion-1d",
+          "title": "Position, Velocity and Acceleration in One Dimension",
+          "order": 40,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "phys1.estimation"
+          ]
+        },
+        {
+          "id": "phys1.motion-2d",
+          "title": "Motion in Two and Three Dimensions",
+          "order": 50,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "phys1.motion-1d"
+          ]
+        },
+        {
+          "id": "phys1.projectiles",
+          "title": "Projectile Motion",
+          "order": 60,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "phys1.motion-2d"
+          ]
+        },
+        {
+          "id": "phys1.relative-motion",
+          "title": "Relative Motion and Reference Frames",
+          "order": 70,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "phys1.projectiles"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dynamics",
+      "title": "Newtonian Dynamics",
+      "description": "",
+      "order": 30,
+      "plannedLessons": [
+        {
+          "id": "phys1.newton-laws",
+          "title": "Newton’s Laws",
+          "order": 80,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "phys1.relative-motion"
+          ]
+        },
+        {
+          "id": "phys1.free-body",
+          "title": "Free-Body Diagrams and Constraint Forces",
+          "order": 90,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "phys1.newton-laws"
+          ]
+        },
+        {
+          "id": "phys1.friction-drag",
+          "title": "Friction and Resistive Forces",
+          "order": 100,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "phys1.free-body"
+          ]
+        },
+        {
+          "id": "phys1.circular-motion",
+          "title": "Circular Motion and Centripetal Dynamics",
+          "order": 110,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "phys1.friction-drag"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "energy",
+      "title": "Work and Energy",
+      "description": "",
+      "order": 40,
+      "plannedLessons": [
+        {
+          "id": "phys1.work",
+          "title": "Work and Kinetic Energy",
+          "order": 120,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "phys1.circular-motion"
+          ]
+        },
+        {
+          "id": "phys1.potential",
+          "title": "Potential Energy and Conservative Forces",
+          "order": 130,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "phys1.work"
+          ]
+        },
+        {
+          "id": "phys1.energy-conservation",
+          "title": "Conservation of Mechanical Energy",
+          "order": 140,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "phys1.potential"
+          ]
+        },
+        {
+          "id": "phys1.power",
+          "title": "Power and Energy Transfer",
+          "order": 150,
+          "estimatedMinutes": 85,
+          "prerequisites": [
+            "phys1.energy-conservation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "momentum",
+      "title": "Momentum and Systems",
+      "description": "",
+      "order": 50,
+      "plannedLessons": [
+        {
+          "id": "phys1.momentum",
+          "title": "Linear Momentum and Impulse",
+          "order": 160,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "phys1.power"
+          ]
+        },
+        {
+          "id": "phys1.collisions",
+          "title": "Collisions and Conservation Laws",
+          "order": 170,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "phys1.momentum"
+          ]
+        },
+        {
+          "id": "phys1.center-mass",
+          "title": "Center of Mass and Systems of Particles",
+          "order": 180,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "phys1.collisions"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rotation",
+      "title": "Rotational Mechanics",
+      "description": "",
+      "order": 60,
+      "plannedLessons": [
+        {
+          "id": "phys1.angular-kinematics",
+          "title": "Angular Kinematics",
+          "order": 190,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "phys1.center-mass"
+          ]
+        },
+        {
+          "id": "phys1.torque",
+          "title": "Torque and Rotational Dynamics",
+          "order": 200,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "phys1.angular-kinematics"
+          ]
+        },
+        {
+          "id": "phys1.angular-momentum",
+          "title": "Angular Momentum",
+          "order": 210,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "phys1.torque"
+          ]
+        },
+        {
+          "id": "phys1.rolling",
+          "title": "Rolling Motion",
+          "order": 220,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "phys1.angular-momentum"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "oscillations",
+      "title": "Oscillations and Synthesis",
+      "description": "",
+      "order": 70,
+      "plannedLessons": [
+        {
+          "id": "phys1.shm",
+          "title": "Simple Harmonic Motion",
+          "order": 230,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "phys1.rolling"
+          ]
+        },
+        {
+          "id": "phys1.energy-shm",
+          "title": "Energy in Oscillatory Systems",
+          "order": 240,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "phys1.shm"
+          ]
+        },
+        {
+          "id": "phys1.physics-modeling",
+          "title": "Comprehensive Mechanics Modeling",
+          "order": 250,
+          "estimatedMinutes": 125,
+          "prerequisites": [
+            "phys1.energy-shm"
+          ]
+        }
+      ]
+    }
+  ]
+}

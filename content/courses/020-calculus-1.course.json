@@ -1,0 +1,384 @@
+{
+  "schemaVersion": 1,
+  "id": "calculus-1",
+  "code": "MATH-101",
+  "label": "Calculus I",
+  "track": "Mathematics & Science",
+  "year": 1,
+  "term": "1",
+  "order": 20,
+  "accent": "cobalt",
+  "recommendedHours": 120,
+  "description": "University-level single-variable analysis: functions, limits, continuity, differentiation, integration, sequences and series, with emphasis on rigorous reasoning and problem solving.",
+  "prerequisites": [],
+  "outcomes": [
+    "Manipulate functions and inequalities confidently enough for university analysis.",
+    "Evaluate and justify limits using both computational techniques and formal definitions.",
+    "Use derivatives to analyze local and global behavior of functions.",
+    "Understand the Riemann integral and the Fundamental Theorem of Calculus.",
+    "Analyze basic sequences and series and communicate mathematical arguments clearly."
+  ],
+  "assessments": [
+    {
+      "id": "calc1-problem-set-1",
+      "title": "Analysis Problem Set I",
+      "type": "problem-set",
+      "weight": 15
+    },
+    {
+      "id": "calc1-midterm",
+      "title": "Calculus I Midterm",
+      "type": "exam",
+      "weight": 30
+    },
+    {
+      "id": "calc1-final",
+      "title": "Calculus I Final",
+      "type": "exam",
+      "weight": 55
+    }
+  ],
+  "modules": [
+    {
+      "id": "foundations",
+      "title": "Foundations and the Real Number Line",
+      "description": "",
+      "order": 10,
+      "plannedLessons": [
+        {
+          "id": "calc1.sets-numbers",
+          "title": "Sets, Number Systems and Intervals",
+          "order": 10,
+          "estimatedMinutes": 85,
+          "prerequisites": []
+        },
+        {
+          "id": "calc1.algebra-review",
+          "title": "Algebraic Manipulation, Equations and Inequalities",
+          "order": 20,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "calc1.sets-numbers"
+          ]
+        },
+        {
+          "id": "calc1.absolute-value",
+          "title": "Absolute Value and Distance",
+          "order": 30,
+          "estimatedMinutes": 80,
+          "prerequisites": [
+            "calc1.algebra-review"
+          ]
+        },
+        {
+          "id": "calc1.functions",
+          "title": "Functions, Domains, Ranges and Composition",
+          "order": 40,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "calc1.absolute-value"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "limits",
+      "title": "Limits",
+      "description": "",
+      "order": 20,
+      "plannedLessons": [
+        {
+          "id": "calc1.limit-intuition",
+          "title": "The Limit Concept and Local Behavior",
+          "order": 50,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "calc1.functions"
+          ]
+        },
+        {
+          "id": "calc1.limit-laws",
+          "title": "Limit Laws and Algebraic Techniques",
+          "order": 60,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "calc1.limit-intuition"
+          ]
+        },
+        {
+          "id": "calc1.infinite-limits",
+          "title": "Infinite Limits and Asymptotic Behavior",
+          "order": 70,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "calc1.limit-laws"
+          ]
+        },
+        {
+          "id": "calc1.epsilon-delta",
+          "title": "The Epsilon–Delta Definition",
+          "order": 80,
+          "estimatedMinutes": 120,
+          "prerequisites": [
+            "calc1.infinite-limits"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "continuity",
+      "title": "Continuity",
+      "description": "",
+      "order": 30,
+      "plannedLessons": [
+        {
+          "id": "calc1.continuity-definition",
+          "title": "Continuity and Types of Discontinuity",
+          "order": 90,
+          "estimatedMinutes": 85,
+          "prerequisites": [
+            "calc1.epsilon-delta"
+          ]
+        },
+        {
+          "id": "calc1.ivt",
+          "title": "Intermediate Value Theorem",
+          "order": 100,
+          "estimatedMinutes": 85,
+          "prerequisites": [
+            "calc1.continuity-definition"
+          ]
+        },
+        {
+          "id": "calc1.compactness-one-variable",
+          "title": "Closed Intervals, Extrema and Key Theorems",
+          "order": 110,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "calc1.ivt"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "derivatives",
+      "title": "Differential Calculus",
+      "description": "",
+      "order": 40,
+      "plannedLessons": [
+        {
+          "id": "calc1.derivative-definition",
+          "title": "Derivative as a Limit",
+          "order": 120,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "calc1.compactness-one-variable"
+          ]
+        },
+        {
+          "id": "calc1.rules",
+          "title": "Differentiation Rules",
+          "order": 130,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "calc1.derivative-definition"
+          ]
+        },
+        {
+          "id": "calc1.chain-rule",
+          "title": "Chain Rule and Composite Functions",
+          "order": 140,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "calc1.rules"
+          ]
+        },
+        {
+          "id": "calc1.implicit-inverse",
+          "title": "Implicit Differentiation and Inverse Functions",
+          "order": 150,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "calc1.chain-rule"
+          ]
+        },
+        {
+          "id": "calc1.mean-value",
+          "title": "Rolle and Mean Value Theorems",
+          "order": 160,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "calc1.implicit-inverse"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "applications-derivatives",
+      "title": "Applications of Derivatives",
+      "description": "",
+      "order": 50,
+      "plannedLessons": [
+        {
+          "id": "calc1.monotonicity-extrema",
+          "title": "Monotonicity, Extrema and Critical Points",
+          "order": 170,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "calc1.mean-value"
+          ]
+        },
+        {
+          "id": "calc1.convexity",
+          "title": "Convexity, Concavity and Inflection",
+          "order": 180,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "calc1.monotonicity-extrema"
+          ]
+        },
+        {
+          "id": "calc1.taylor",
+          "title": "Taylor Polynomials and Local Approximation",
+          "order": 190,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "calc1.convexity"
+          ]
+        },
+        {
+          "id": "calc1.optimization",
+          "title": "Optimization Problems",
+          "order": 200,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "calc1.taylor"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "integration",
+      "title": "Integral Calculus",
+      "description": "",
+      "order": 60,
+      "plannedLessons": [
+        {
+          "id": "calc1.riemann",
+          "title": "Riemann Sums and the Definite Integral",
+          "order": 210,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "calc1.optimization"
+          ]
+        },
+        {
+          "id": "calc1.fundamental-theorem",
+          "title": "Fundamental Theorem of Calculus",
+          "order": 220,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "calc1.riemann"
+          ]
+        },
+        {
+          "id": "calc1.integration-techniques",
+          "title": "Substitution and Integration by Parts",
+          "order": 230,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "calc1.fundamental-theorem"
+          ]
+        },
+        {
+          "id": "calc1.improper-integrals",
+          "title": "Improper Integrals",
+          "order": 240,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "calc1.integration-techniques"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sequences-series",
+      "title": "Sequences and Series",
+      "description": "",
+      "order": 70,
+      "plannedLessons": [
+        {
+          "id": "calc1.sequences",
+          "title": "Sequences, Limits and Monotonicity",
+          "order": 250,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "calc1.improper-integrals"
+          ]
+        },
+        {
+          "id": "calc1.series",
+          "title": "Infinite Series and Convergence",
+          "order": 260,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "calc1.sequences"
+          ]
+        },
+        {
+          "id": "calc1.convergence-tests",
+          "title": "Comparison, Ratio and Root Tests",
+          "order": 270,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "calc1.series"
+          ]
+        },
+        {
+          "id": "calc1.power-series",
+          "title": "Power Series and Taylor Series",
+          "order": 280,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "calc1.convergence-tests"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "synthesis",
+      "title": "Synthesis and Proof Practice",
+      "description": "",
+      "order": 80,
+      "plannedLessons": [
+        {
+          "id": "calc1.proof-patterns",
+          "title": "Proof Patterns Used in Analysis",
+          "order": 290,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "calc1.power-series"
+          ]
+        },
+        {
+          "id": "calc1.mixed-problems",
+          "title": "Mixed Analysis Problems",
+          "order": 300,
+          "estimatedMinutes": 120,
+          "prerequisites": [
+            "calc1.proof-patterns"
+          ]
+        },
+        {
+          "id": "calc1.final-synthesis",
+          "title": "Calculus I Comprehensive Synthesis",
+          "order": 310,
+          "estimatedMinutes": 150,
+          "prerequisites": [
+            "calc1.mixed-problems"
+          ]
+        }
+      ]
+    }
+  ]
+}

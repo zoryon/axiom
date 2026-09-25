@@ -1,0 +1,383 @@
+{
+  "schemaVersion": 1,
+  "id": "discrete-math-logic-1",
+  "code": "MATH-121",
+  "label": "Discrete Mathematics & Logic I",
+  "track": "Computer Science",
+  "year": 1,
+  "term": "1",
+  "order": 40,
+  "accent": "cobalt",
+  "recommendedHours": 90,
+  "description": "The mathematical language of computer science: propositional and predicate logic, sets, relations, functions, proof, induction, counting, recurrences, graphs and Boolean reasoning.",
+  "prerequisites": [],
+  "outcomes": [
+    "Translate informal statements into propositional and predicate logic.",
+    "Construct correct direct, contrapositive, contradiction and induction proofs.",
+    "Reason about sets, relations, functions and finite structures.",
+    "Solve foundational counting and recurrence problems.",
+    "Use graph and Boolean models that later support algorithms, circuits and formal reasoning."
+  ],
+  "assessments": [],
+  "modules": [
+    {
+      "id": "logic",
+      "title": "Propositional Logic",
+      "description": "",
+      "order": 10,
+      "plannedLessons": [
+        {
+          "id": "discrete.propositions",
+          "title": "Propositions, Connectives and Truth Values",
+          "order": 10,
+          "estimatedMinutes": 80,
+          "prerequisites": []
+        },
+        {
+          "id": "discrete.truth-tables",
+          "title": "Truth Tables and Logical Equivalence",
+          "order": 20,
+          "estimatedMinutes": 85,
+          "prerequisites": [
+            "discrete.propositions"
+          ]
+        },
+        {
+          "id": "discrete.implication",
+          "title": "Implication, Converse, Contrapositive and Biconditional",
+          "order": 30,
+          "estimatedMinutes": 85,
+          "prerequisites": [
+            "discrete.truth-tables"
+          ]
+        },
+        {
+          "id": "discrete.normal-forms",
+          "title": "Normal Forms and Logical Simplification",
+          "order": 40,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "discrete.implication"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "predicate-logic",
+      "title": "Predicate Logic",
+      "description": "",
+      "order": 20,
+      "plannedLessons": [
+        {
+          "id": "discrete.predicates",
+          "title": "Predicates and Quantifiers",
+          "order": 50,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "discrete.normal-forms"
+          ]
+        },
+        {
+          "id": "discrete.nested-quantifiers",
+          "title": "Nested Quantifiers and Scope",
+          "order": 60,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "discrete.predicates"
+          ]
+        },
+        {
+          "id": "discrete.negating-statements",
+          "title": "Negating Quantified Statements",
+          "order": 70,
+          "estimatedMinutes": 85,
+          "prerequisites": [
+            "discrete.nested-quantifiers"
+          ]
+        },
+        {
+          "id": "discrete.formalization",
+          "title": "Formalizing Mathematical and Program Statements",
+          "order": 80,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "discrete.negating-statements"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "proof",
+      "title": "Proof Techniques",
+      "description": "",
+      "order": 30,
+      "plannedLessons": [
+        {
+          "id": "discrete.direct-proof",
+          "title": "Direct Proof",
+          "order": 90,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "discrete.formalization"
+          ]
+        },
+        {
+          "id": "discrete.contrapositive-contradiction",
+          "title": "Contrapositive and Contradiction",
+          "order": 100,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "discrete.direct-proof"
+          ]
+        },
+        {
+          "id": "discrete.cases-existence",
+          "title": "Proof by Cases, Existence and Uniqueness",
+          "order": 110,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "discrete.contrapositive-contradiction"
+          ]
+        },
+        {
+          "id": "discrete.induction",
+          "title": "Mathematical Induction",
+          "order": 120,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "discrete.cases-existence"
+          ]
+        },
+        {
+          "id": "discrete.strong-induction",
+          "title": "Strong Induction and Recursive Reasoning",
+          "order": 130,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "discrete.induction"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sets-functions-relations",
+      "title": "Sets, Functions and Relations",
+      "description": "",
+      "order": 40,
+      "plannedLessons": [
+        {
+          "id": "discrete.sets",
+          "title": "Set Operations and Identities",
+          "order": 140,
+          "estimatedMinutes": 85,
+          "prerequisites": [
+            "discrete.strong-induction"
+          ]
+        },
+        {
+          "id": "discrete.functions",
+          "title": "Functions, Injection, Surjection and Bijection",
+          "order": 150,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "discrete.sets"
+          ]
+        },
+        {
+          "id": "discrete.relations",
+          "title": "Binary Relations and Properties",
+          "order": 160,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "discrete.functions"
+          ]
+        },
+        {
+          "id": "discrete.equivalence",
+          "title": "Equivalence Relations and Partitions",
+          "order": 170,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "discrete.relations"
+          ]
+        },
+        {
+          "id": "discrete.orders",
+          "title": "Partial Orders and Hasse Diagrams",
+          "order": 180,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "discrete.equivalence"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "counting",
+      "title": "Combinatorics",
+      "description": "",
+      "order": 50,
+      "plannedLessons": [
+        {
+          "id": "discrete.counting-principles",
+          "title": "Sum and Product Principles",
+          "order": 190,
+          "estimatedMinutes": 85,
+          "prerequisites": [
+            "discrete.orders"
+          ]
+        },
+        {
+          "id": "discrete.permutations-combinations",
+          "title": "Permutations and Combinations",
+          "order": 200,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "discrete.counting-principles"
+          ]
+        },
+        {
+          "id": "discrete.pigeonhole",
+          "title": "Pigeonhole Principle",
+          "order": 210,
+          "estimatedMinutes": 85,
+          "prerequisites": [
+            "discrete.permutations-combinations"
+          ]
+        },
+        {
+          "id": "discrete.inclusion-exclusion",
+          "title": "Inclusion–Exclusion",
+          "order": 220,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "discrete.pigeonhole"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "recurrences",
+      "title": "Recurrences and Discrete Growth",
+      "description": "",
+      "order": 60,
+      "plannedLessons": [
+        {
+          "id": "discrete.recursive-definitions",
+          "title": "Recursive Definitions",
+          "order": 230,
+          "estimatedMinutes": 85,
+          "prerequisites": [
+            "discrete.inclusion-exclusion"
+          ]
+        },
+        {
+          "id": "discrete.recurrence-relations",
+          "title": "Recurrence Relations",
+          "order": 240,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "discrete.recursive-definitions"
+          ]
+        },
+        {
+          "id": "discrete.growth-intro",
+          "title": "Growth Rates and Asymptotic Intuition",
+          "order": 250,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "discrete.recurrence-relations"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "graphs",
+      "title": "Graph Foundations",
+      "description": "",
+      "order": 70,
+      "plannedLessons": [
+        {
+          "id": "discrete.graphs-models",
+          "title": "Graphs as Mathematical Models",
+          "order": 260,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "discrete.growth-intro"
+          ]
+        },
+        {
+          "id": "discrete.paths-connectivity",
+          "title": "Paths, Cycles and Connectivity",
+          "order": 270,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "discrete.graphs-models"
+          ]
+        },
+        {
+          "id": "discrete.trees",
+          "title": "Trees and Rooted Trees",
+          "order": 280,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "discrete.paths-connectivity"
+          ]
+        },
+        {
+          "id": "discrete.graph-reasoning",
+          "title": "Graph Proof and Counting Problems",
+          "order": 290,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "discrete.trees"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "boolean",
+      "title": "Boolean Algebra and CS Transfer",
+      "description": "",
+      "order": 80,
+      "plannedLessons": [
+        {
+          "id": "discrete.boolean-algebra",
+          "title": "Boolean Algebra",
+          "order": 300,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "discrete.graph-reasoning"
+          ]
+        },
+        {
+          "id": "discrete.logic-circuits-intro",
+          "title": "From Boolean Expressions to Logic Circuits",
+          "order": 310,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "discrete.boolean-algebra"
+          ]
+        },
+        {
+          "id": "discrete.invariants",
+          "title": "Invariants and Discrete Reasoning in Programs",
+          "order": 320,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "discrete.logic-circuits-intro"
+          ]
+        },
+        {
+          "id": "discrete.final-synthesis",
+          "title": "Discrete Mathematics Comprehensive Synthesis",
+          "order": 330,
+          "estimatedMinutes": 140,
+          "prerequisites": [
+            "discrete.invariants"
+          ]
+        }
+      ]
+    }
+  ]
+}

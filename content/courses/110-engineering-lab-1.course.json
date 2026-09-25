@@ -1,0 +1,244 @@
+{
+  "schemaVersion": 1,
+  "id": "engineering-lab-1",
+  "code": "ENG-110",
+  "label": "Engineering Laboratory I",
+  "track": "Software Engineering",
+  "year": 1,
+  "term": "year",
+  "order": 110,
+  "accent": "moss",
+  "recommendedHours": 90,
+  "description": "Year-long laboratory that turns theory into engineering behavior: specification, debugging, testing, code review, performance measurement, small systems and technical communication.",
+  "prerequisites": [],
+  "outcomes": [
+    "Turn ambiguous requirements into explicit, testable technical specifications.",
+    "Debug unfamiliar failures methodically using evidence.",
+    "Write tests that target invariants, boundaries and failure modes.",
+    "Review code for correctness, maintainability, safety and performance.",
+    "Explain engineering decisions in concise technical documents and postmortems."
+  ],
+  "assessments": [],
+  "modules": [
+    {
+      "id": "engineering-method",
+      "title": "Engineering Method",
+      "description": "",
+      "order": 10,
+      "plannedLessons": [
+        {
+          "id": "englab1.requirements",
+          "title": "From Vague Requirements to Testable Behavior",
+          "order": 10,
+          "estimatedMinutes": 90,
+          "prerequisites": [
+            "tools.shell-filesystem",
+            "c1.conditionals"
+          ]
+        },
+        {
+          "id": "englab1.invariants",
+          "title": "Identifying and Writing Invariants",
+          "order": 20,
+          "estimatedMinutes": 95,
+          "prerequisites": [
+            "englab1.requirements"
+          ]
+        },
+        {
+          "id": "englab1.reproduction",
+          "title": "Minimal Reproduction and Controlled Experiments",
+          "order": 30,
+          "estimatedMinutes": 100,
+          "prerequisites": [
+            "englab1.invariants"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "debugging",
+      "title": "Debugging Practicum",
+      "description": "",
+      "order": 20,
+      "plannedLessons": [
+        {
+          "id": "englab1.debug-crash",
+          "title": "Investigate a Deterministic Crash",
+          "order": 40,
+          "estimatedMinutes": 120,
+          "prerequisites": [
+            "englab1.reproduction"
+          ]
+        },
+        {
+          "id": "englab1.debug-memory",
+          "title": "Investigate a Memory Error",
+          "order": 50,
+          "estimatedMinutes": 150,
+          "prerequisites": [
+            "englab1.debug-crash"
+          ]
+        },
+        {
+          "id": "englab1.debug-state",
+          "title": "Investigate Incorrect State Evolution",
+          "order": 60,
+          "estimatedMinutes": 135,
+          "prerequisites": [
+            "englab1.debug-memory"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "testing",
+      "title": "Testing Practicum",
+      "description": "",
+      "order": 30,
+      "plannedLessons": [
+        {
+          "id": "englab1.test-design",
+          "title": "Design Tests from a Specification",
+          "order": 70,
+          "estimatedMinutes": 120,
+          "prerequisites": [
+            "englab1.debug-state"
+          ]
+        },
+        {
+          "id": "englab1.boundaries",
+          "title": "Boundary and Adversarial Test Design",
+          "order": 80,
+          "estimatedMinutes": 120,
+          "prerequisites": [
+            "englab1.test-design"
+          ]
+        },
+        {
+          "id": "englab1.regression",
+          "title": "Regression Tests after a Bug Fix",
+          "order": 90,
+          "estimatedMinutes": 105,
+          "prerequisites": [
+            "englab1.boundaries"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "code-review",
+      "title": "Code Review and Refactoring",
+      "description": "",
+      "order": 40,
+      "plannedLessons": [
+        {
+          "id": "englab1.review-correctness",
+          "title": "Review for Correctness and Undefined Behavior",
+          "order": 100,
+          "estimatedMinutes": 120,
+          "prerequisites": [
+            "englab1.regression"
+          ]
+        },
+        {
+          "id": "englab1.review-design",
+          "title": "Review for Interfaces, Coupling and Clarity",
+          "order": 110,
+          "estimatedMinutes": 120,
+          "prerequisites": [
+            "englab1.review-correctness"
+          ]
+        },
+        {
+          "id": "englab1.refactor",
+          "title": "Refactor without Changing Behavior",
+          "order": 120,
+          "estimatedMinutes": 135,
+          "prerequisites": [
+            "englab1.review-design"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "performance",
+      "title": "Performance Practicum",
+      "description": "",
+      "order": 50,
+      "plannedLessons": [
+        {
+          "id": "englab1.measurement",
+          "title": "Measure Before Optimizing",
+          "order": 130,
+          "estimatedMinutes": 110,
+          "prerequisites": [
+            "englab1.refactor"
+          ]
+        },
+        {
+          "id": "englab1.profile",
+          "title": "Profile a Small Program",
+          "order": 140,
+          "estimatedMinutes": 120,
+          "prerequisites": [
+            "englab1.measurement"
+          ]
+        },
+        {
+          "id": "englab1.optimize",
+          "title": "Optimize and Defend the Trade-Off",
+          "order": 150,
+          "estimatedMinutes": 135,
+          "prerequisites": [
+            "englab1.profile"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "capstone",
+      "title": "Year-One Engineering Capstone",
+      "description": "",
+      "order": 60,
+      "plannedLessons": [
+        {
+          "id": "englab1.specification",
+          "title": "Capstone Specification and Architecture Note",
+          "order": 160,
+          "estimatedMinutes": 150,
+          "prerequisites": [
+            "englab1.optimize"
+          ]
+        },
+        {
+          "id": "englab1.implementation",
+          "title": "Capstone Implementation Milestone",
+          "order": 170,
+          "estimatedMinutes": 240,
+          "prerequisites": [
+            "englab1.specification"
+          ]
+        },
+        {
+          "id": "englab1.verification",
+          "title": "Capstone Verification and Failure Testing",
+          "order": 180,
+          "estimatedMinutes": 180,
+          "prerequisites": [
+            "englab1.implementation"
+          ]
+        },
+        {
+          "id": "englab1.review-postmortem",
+          "title": "Capstone Review, Benchmark and Postmortem",
+          "order": 190,
+          "estimatedMinutes": 180,
+          "prerequisites": [
+            "englab1.verification"
+          ]
+        }
+      ]
+    }
+  ]
+}
