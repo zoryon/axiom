@@ -50,6 +50,16 @@ export function createDb(dbPath) {
       minutes INTEGER NOT NULL CHECK(minutes >= 0),
       created_at TEXT NOT NULL
     );
+    CREATE TABLE IF NOT EXISTS tutor_memory (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      lesson_id TEXT NOT NULL,
+      title TEXT NOT NULL DEFAULT 'Tutor session',
+      body TEXT NOT NULL,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+    CREATE INDEX IF NOT EXISTS idx_tutor_memory_lesson_created
+      ON tutor_memory (lesson_id, created_at DESC);
   `);
   return db;
 }

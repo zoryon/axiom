@@ -50,25 +50,43 @@ async function copyText(text) {
   }
 }
 
-function tutorContext(meta, course, blocks=[]) {
-  const objectives=(meta.objectives||[]).map(x=>`- ${x}`).join('\n') || '- Not specified';
-  const outline=blocks.filter(b=>b.type==='heading' && b.level<=3).slice(0,18).map(b=>`- ${b.text}`).join('\n') || '- No explicit headings';
-  return `Course: ${course.code} — ${course.label}\nModule: ${meta.module}\nLesson: ${meta.title}\nLesson ID: ${meta.id}\n\nLearning objectives:\n${objectives}\n\nLesson outline:\n${outline}`;
+function tutorMemoryContext(entries=[], maxChars=18000) {
+  if(!Array.isArray(entries) || !entries.length) return '';
+  const selected=[]; let used=0;
+  for(const entry of entries) {
+    const body=String(entry.body || '').trim();
+    if(!body) continue;
+    const label=entry.title || 'Tutor session';
+    const date=entry.created_at ? new Date(entry.created_at).toLocaleDateString('en-GB') : '';
+    const chunk=`### ${label}${date ? ` · ${date}` : ''}\n${body}`;
+    if(selected.length && used + chunk.length > maxChars) break;
+    selected.push(chunk); used += chunk.length;
+  }
+  if(!selected.length) return '';
+  const omitted=Math.max(0, entries.filter(x=>String(x.body||'').trim()).length-selected.length);
+  return `\n\nPRIOR TUTOR MEMORY — saved locally in AXIOM\nUse this as continuity from earlier tutoring sessions. Do not assume it is infallible: if a saved belief conflicts with the current lesson or my new reasoning, correct it. Avoid needlessly restarting from concepts already confirmed, but revisit anything marked uncertain or misunderstood.\n\n${selected.reverse().join('\n\n---\n\n')}${omitted ? `\n\n[${omitted} older saved session(s) omitted from this copied prompt to keep the context manageable.]` : ''}`;
 }
 
-function tutorPrompt(mode,{meta,course,blocks=[],question='',explanation='',quizPrompt='',quizAnswer=''}) {
-  const context=tutorContext(meta,course,blocks);
+function tutorContext(meta, course, blocks=[], memory=[]) {
+  const objectives=(meta.objectives||[]).map(x=>`- ${x}`).join('\n') || '- Not specified';
+  const outline=blocks.filter(b=>b.type==='heading' && b.level<=3).slice(0,18).map(b=>`- ${b.text}`).join('\n') || '- No explicit headings';
+  return `Course: ${course.code} — ${course.label}\nModule: ${meta.module}\nLesson: ${meta.title}\nLesson ID: ${meta.id}\n\nLearning objectives:\n${objectives}\n\nLesson outline:\n${outline}${tutorMemoryContext(memory)}`;
+}
+
+function tutorPrompt(mode,{meta,course,blocks=[],memory=[],question='',explanation='',quizPrompt='',quizAnswer=''}) {
+  const context=tutorContext(meta,course,blocks,mode==='summary'?[]:memory);
   const base=`I'm studying through AXIOM, my local university-level computer science / computer engineering curriculum.\n\n${context}\n\n`;
-  if(mode==='ask') return base + `TUTOR MODE — ASK TUTOR\n\nAct as a rigorous university-level tutor for this lesson. Help me understand the specific point I ask about without replacing the whole lesson with a generic summary. Build the explanation from the mental model upward, distinguish precise definitions from intuition, and use small examples or code when useful. If my question reveals a misconception, identify it explicitly. If the question is ambiguous, ask one short diagnostic question before giving a long explanation.\n\nMy question:\n${question.trim() || '[I will write my question after pasting this prompt.]'}`;
-  if(mode==='check') return base + `TUTOR MODE — CHECK MY UNDERSTANDING\n\nI have just studied this lesson. Check whether I truly understand it at university-level depth.\n\nDo NOT immediately reteach the lesson and do NOT reveal answers before I attempt them. Ask me one question at a time. Begin with conceptual understanding, then increase difficulty using reasoning, tracing, edge cases, and small code or mathematical examples when appropriate. Challenge shallow memorization and hidden misconceptions. After each answer, tell me specifically what is correct, incomplete, imprecise, or wrong, then continue.\n\nWhen you have enough evidence, finish with: (1) what I clearly understand, (2) gaps or misconceptions, (3) what I should review, and (4) whether I am ready to move on. Do not give me a numeric grade unless I ask for one.`;
-  if(mode==='teachback') return base + `TUTOR MODE — TEACH IT BACK / FEYNMAN CHECK\n\nI want to explain this lesson freely in my own words so you can detect whether I actually understood it. Be demanding and precise. Do not reward vague wording just because it sounds plausible.\n\nAnalyze my explanation for factual errors, subtle misconceptions, imprecise terminology, missing important concepts, technically true but misleading claims, memorized wording without causal understanding, collapsed distinctions, and important edge cases I ignored. For every issue: point to the relevant part of my explanation, explain exactly what is wrong or incomplete, give the corrected mental model, and ask me to explain that point again in my own words. Then probe the repaired weak points with a few targeted questions.\n\nAt the end, separate: what I clearly understand; what I only partially understand; misconceptions that remain; what I should review; and whether I am ready to move on. Do not simply reteach the entire lesson unless my explanation shows that I need it.\n\nMy explanation:\n${explanation.trim() || '[Wait for me to send my explanation. Do not start examining me until I have explained it.]'}`;
-  if(mode==='review-answer') return base + `TUTOR MODE — REVIEW MY ANSWER\n\nEvaluate my answer rigorously, not just by whether it resembles a model answer. Check correctness, completeness, terminology, reasoning, hidden misconceptions, and whether the explanation demonstrates real understanding. Tell me exactly what is correct, incomplete, misleading, or wrong. Then give the corrected mental model and ask one targeted follow-up question that tests the weakest point.\n\nQuestion:\n${quizPrompt}\n\nMy answer:\n${quizAnswer}`;
+  if(mode==='ask') return base + `TUTOR MODE — ASK TUTOR\n\nAct as a rigorous university-level tutor for this lesson. Help me understand the specific point I ask about without replacing the whole lesson with a generic summary. Build the explanation from the mental model upward, distinguish precise definitions from intuition, and use small examples or code when useful. If my question reveals a misconception, identify it explicitly. Use the PRIOR TUTOR MEMORY when present so you continue from what we already established instead of restarting from zero. If the question is ambiguous, ask one short diagnostic question before giving a long explanation.\n\nMy question:\n${question.trim() || '[I will write my question after pasting this prompt.]'}`;
+  if(mode==='check') return base + `TUTOR MODE — CHECK MY UNDERSTANDING\n\nI have just studied this lesson. Check whether I truly understand it at university-level depth. Use the PRIOR TUTOR MEMORY when present: target known weak points, do not waste time re-establishing things that were already demonstrated clearly unless a quick verification is useful, and check whether previously corrected misconceptions are actually repaired.\n\nDo NOT immediately reteach the lesson and do NOT reveal answers before I attempt them. Ask me one question at a time. Begin with conceptual understanding, then increase difficulty using reasoning, tracing, edge cases, and small code or mathematical examples when appropriate. Challenge shallow memorization and hidden misconceptions. After each answer, tell me specifically what is correct, incomplete, imprecise, or wrong, then continue.\n\nWhen you have enough evidence, finish with: (1) what I clearly understand, (2) gaps or misconceptions, (3) what I should review, and (4) whether I am ready to move on. Do not give me a numeric grade unless I ask for one.`;
+  if(mode==='teachback') return base + `TUTOR MODE — TEACH IT BACK / FEYNMAN CHECK\n\nI want to explain this lesson freely in my own words so you can detect whether I actually understood it. Use PRIOR TUTOR MEMORY when present to compare my current explanation with earlier weak points and corrections. Be demanding and precise. Do not reward vague wording just because it sounds plausible.\n\nAnalyze my explanation for factual errors, subtle misconceptions, imprecise terminology, missing important concepts, technically true but misleading claims, memorized wording without causal understanding, collapsed distinctions, and important edge cases I ignored. For every issue: point to the relevant part of my explanation, explain exactly what is wrong or incomplete, give the corrected mental model, and ask me to explain that point again in my own words. Then probe the repaired weak points with a few targeted questions.\n\nAt the end, separate: what I clearly understand; what I only partially understand; misconceptions that remain; what I should review; and whether I am ready to move on. Do not simply reteach the entire lesson unless my explanation shows that I need it.\n\nMy explanation:\n${explanation.trim() || '[Wait for me to send my explanation. Do not start examining me until I have explained it.]'}`;
+  if(mode==='review-answer') return base + `TUTOR MODE — REVIEW MY ANSWER\n\nEvaluate my answer rigorously, not just by whether it resembles a model answer. Use PRIOR TUTOR MEMORY when present so you can notice repeated misconceptions or improvements over earlier attempts. Check correctness, completeness, terminology, reasoning, hidden misconceptions, and whether the explanation demonstrates real understanding. Tell me exactly what is correct, incomplete, misleading, or wrong. Then give the corrected mental model and ask one targeted follow-up question that tests the weakest point.\n\nQuestion:\n${quizPrompt}\n\nMy answer:\n${quizAnswer}`;
+  if(mode==='summary') return base + `TUTOR MODE — CREATE AXIOM SESSION MEMORY\n\nWe are at the end (or a useful checkpoint) of this tutoring conversation. Create a durable learning-memory summary that I can paste back into AXIOM and reuse as context in future ChatGPT sessions. Summarize the tutoring conversation relevant to this lesson, not the lesson textbook itself.\n\nPreserve what matters for continuity: the questions I asked; how I initially understood the topic; factual errors or subtle misconceptions you corrected; distinctions that were important; explanations/examples/analogies that helped; what I successfully demonstrated; what remains uncertain; follow-up questions I struggled with; and concrete things I should review next. If my understanding changed during the chat, record the corrected final mental model rather than leaving the earlier mistake ambiguous.\n\nBe concise enough to reuse as prompt context, but detailed enough that a fresh ChatGPT conversation can continue without starting from zero. Do not invent facts about what I understood.\n\nReturn ONLY the memory entry, using exactly this structure:\n\nTITLE: <short descriptive title>\nTOPICS DISCUSSED:\n- ...\nQUESTIONS I ASKED:\n- ...\nMY INITIAL MODEL / CLAIMS:\n- ...\nCORRECTIONS & IMPORTANT DISTINCTIONS:\n- ...\nWHAT I NOW UNDERSTAND:\n- ...\nREMAINING GAPS / UNCERTAINTIES:\n- ...\nUSEFUL EXAMPLES OR MENTAL MODELS:\n- ...\nNEXT REVIEW TARGETS:\n- ...\n\nIf a section has nothing meaningful, write \"- None\" rather than omitting it.`;
   return base;
 }
 
 async function copyTutorPrompt(mode, payload) {
   await copyText(tutorPrompt(mode,payload));
-  showToast('Tutor prompt copied — paste it into ChatGPT.');
+  showToast(mode==='summary'?'Session-summary prompt copied — paste it into this ChatGPT chat.':'Tutor prompt copied — paste it into ChatGPT.');
 }
 
 function cleanupLessonUI() {
@@ -119,7 +137,7 @@ function quizBlock(block, lessonId) {
     const btn=h('button','action-btn','CHECK ANSWER');
     const tutorBtn=h('button','action-btn secondary','REVIEW WITH TUTOR');
     btn.addEventListener('click', async()=>{ if(!input.value.trim()) return showToast('Write an answer first.'); const out=await api('/api/quiz',{method:'POST',body:JSON.stringify({lessonId,quizId:d.id,answer:input.value})}); result.className='quiz-result ok'; result.textContent=`Model answer: ${out.modelAnswer || ''}${out.explanation ? ` — ${out.explanation}` : ''}`; });
-    tutorBtn.addEventListener('click', async()=>{ if(!input.value.trim()) return showToast('Write your answer first.'); const meta=state.lessonTutor?.meta || state.bootstrap.lessons.find(x=>x.id===lessonId); const course=state.lessonTutor?.course || courseById(meta?.course); if(!meta) return showToast('Lesson context unavailable.'); await copyTutorPrompt('review-answer',{meta,course,blocks:state.lessonTutor?.blocks||[],quizPrompt:d.prompt||'',quizAnswer:input.value}); });
+    tutorBtn.addEventListener('click', async()=>{ if(!input.value.trim()) return showToast('Write your answer first.'); const meta=state.lessonTutor?.meta || state.bootstrap.lessons.find(x=>x.id===lessonId); const course=state.lessonTutor?.course || courseById(meta?.course); if(!meta) return showToast('Lesson context unavailable.'); await copyTutorPrompt('review-answer',{meta,course,blocks:state.lessonTutor?.blocks||[],memory:state.lessonTutor?.tutorMemory||[],quizPrompt:d.prompt||'',quizAnswer:input.value}); });
     append(actions,btn,tutorBtn); append(body,input,actions,result);
   } else {
     const form=h('form'), options=h('div','quiz-options'), multiple=d.type==='multiple-choice';
@@ -270,7 +288,7 @@ async function renderRecord() {
 
 async function renderLesson(id) {
   cleanupLessonUI();
-  const data=await api(`/api/lesson/${encodeURIComponent(id)}`), {lesson,note,tasks,activities}=data, m=lesson.meta, course=courseById(m.course), p=data.progress || {percent:0,status:'not-started'};
+  const data=await api(`/api/lesson/${encodeURIComponent(id)}`), {lesson,note,tasks,activities,tutorMemory=[]}=data, m=lesson.meta, course=courseById(m.course), p=data.progress || {percent:0,status:'not-started'};
   setCrumb(`${course.code} / ${m.module.toUpperCase()}`);
 
   const page=h('section','page lesson-page'), layout=h('div','lesson-layout');
@@ -374,23 +392,67 @@ async function renderLesson(id) {
   const tutorClose=h('button','lesson-tools-close','×'); tutorClose.setAttribute('aria-label','Close tutor workflows');
   append(tutorHead,tutorHeadCopy,tutorClose); tutorPanel.append(tutorHead);
   const tutorBody=h('div','lesson-tools-body tutor-body');
-  const privacy=h('div','tutor-local-note'); append(privacy,h('strong','','LOCAL ONLY'),h('span','','AXIOM never sends lesson data anywhere. These buttons only copy a prepared prompt to your clipboard.')); tutorBody.append(privacy);
+  let memoryEntries=[...(tutorMemory||[])];
+  const privacy=h('div','tutor-local-note');
+  const memoryStatus=h('span','');
+  function refreshMemoryStatus(){ memoryStatus.textContent=memoryEntries.length ? `${memoryEntries.length} saved tutor session${memoryEntries.length===1?'':'s'} will be included automatically in future tutor prompts for this lesson.` : 'No tutor memory saved yet. Future prompts currently start with lesson context only.'; }
+  refreshMemoryStatus();
+  append(privacy,h('strong','','LOCAL MEMORY'),memoryStatus); tutorBody.append(privacy);
 
   const askSection=h('section','tutor-mode');
-  append(askSection,h('div','tutor-mode-index','01'),h('div','tutor-mode-kicker','WHEN SOMETHING IS UNCLEAR'),h('h4','','Ask Tutor'),h('p','','Copy a lesson-aware prompt and include a specific question. The tutor should explain the exact gap without replacing the whole lesson with a summary.'));
+  append(askSection,h('div','tutor-mode-index','01'),h('div','tutor-mode-kicker','WHEN SOMETHING IS UNCLEAR'),h('h4','','Ask Tutor'),h('p','','Copy a lesson-aware prompt and include a specific question. Saved tutor memory is included automatically, so a new ChatGPT chat can continue from previous explanations and corrections.'));
   const askInput=h('textarea','note-box tutor-input'); askInput.placeholder='Optional: write your question here before copying…'; askInput.rows=4;
-  const askCopy=h('button','action-btn','COPY ASK-TUTOR PROMPT'); askCopy.addEventListener('click',()=>copyTutorPrompt('ask',{meta:m,course,blocks:lesson.blocks,question:askInput.value}));
+  const askCopy=h('button','action-btn','COPY ASK-TUTOR PROMPT'); askCopy.addEventListener('click',()=>copyTutorPrompt('ask',{meta:m,course,blocks:lesson.blocks,memory:memoryEntries,question:askInput.value}));
   append(askSection,askInput,askCopy); tutorBody.append(askSection);
 
   const checkSection=h('section','tutor-mode');
-  append(checkSection,h('div','tutor-mode-index','02'),h('div','tutor-mode-kicker','WHEN YOU THINK YOU UNDERSTOOD'),h('h4','','Check My Understanding'),h('p','','The tutor interrogates you one question at a time, increases difficulty, challenges misconceptions, and only then decides whether you are ready to move on.'));
-  const checkCopy=h('button','action-btn','COPY CHECK PROMPT'); checkCopy.addEventListener('click',()=>copyTutorPrompt('check',{meta:m,course,blocks:lesson.blocks})); checkSection.append(checkCopy); tutorBody.append(checkSection);
+  append(checkSection,h('div','tutor-mode-index','02'),h('div','tutor-mode-kicker','WHEN YOU THINK YOU UNDERSTOOD'),h('h4','','Check My Understanding'),h('p','','The tutor interrogates you one question at a time and uses saved memory to retest old weak points instead of starting from zero.'));
+  const checkCopy=h('button','action-btn','COPY CHECK PROMPT'); checkCopy.addEventListener('click',()=>copyTutorPrompt('check',{meta:m,course,blocks:lesson.blocks,memory:memoryEntries})); checkSection.append(checkCopy); tutorBody.append(checkSection);
 
   const teachSection=h('section','tutor-mode');
-  append(teachSection,h('div','tutor-mode-index','03'),h('div','tutor-mode-kicker','WHEN YOU WANT TO EXPLAIN IT YOURSELF'),h('h4','','Teach It Back'),h('p','','Use a Feynman-style check: explain the lesson freely and have the tutor aggressively search for subtle errors, missing links and false confidence.'));
+  append(teachSection,h('div','tutor-mode-index','03'),h('div','tutor-mode-kicker','WHEN YOU WANT TO EXPLAIN IT YOURSELF'),h('h4','','Teach It Back'),h('p','','Explain the lesson freely. Saved tutor memory lets ChatGPT compare your current explanation against misconceptions and corrections from earlier sessions.'));
   const teachInput=h('textarea','note-box tutor-input teachback-input'); teachInput.placeholder='Optional: write your explanation here. Leave it empty if you prefer to explain directly in ChatGPT after pasting.'; teachInput.rows=7;
-  const teachCopy=h('button','action-btn','COPY TEACH-BACK PROMPT'); teachCopy.addEventListener('click',()=>copyTutorPrompt('teachback',{meta:m,course,blocks:lesson.blocks,explanation:teachInput.value}));
+  const teachCopy=h('button','action-btn','COPY TEACH-BACK PROMPT'); teachCopy.addEventListener('click',()=>copyTutorPrompt('teachback',{meta:m,course,blocks:lesson.blocks,memory:memoryEntries,explanation:teachInput.value}));
   append(teachSection,teachInput,teachCopy); tutorBody.append(teachSection);
+
+  const saveSection=h('section','tutor-mode tutor-memory-mode');
+  append(saveSection,h('div','tutor-mode-index','04'),h('div','tutor-mode-kicker','BEFORE YOU LEAVE OR DELETE A CHAT'),h('h4','','Save This Tutor Session'),h('p','','At the end of a useful ChatGPT conversation, copy the summary prompt below into that same chat. Paste ChatGPT’s returned memory here and save it. AXIOM keeps it locally and automatically injects it into later tutor prompts for this lesson.'));
+  const summaryCopy=h('button','action-btn secondary','COPY SESSION SUMMARY PROMPT'); summaryCopy.addEventListener('click',()=>copyTutorPrompt('summary',{meta:m,course,blocks:lesson.blocks}));
+  const memoryTitle=h('input','tutor-memory-title'); memoryTitle.type='text'; memoryTitle.placeholder='Optional title (otherwise AXIOM creates one)'; memoryTitle.maxLength=160;
+  const memoryInput=h('textarea','note-box tutor-input tutor-memory-input'); memoryInput.placeholder='Paste the structured summary returned by ChatGPT here…'; memoryInput.rows=10;
+  const saveMemory=h('button','action-btn','SAVE TO TUTOR MEMORY');
+  const memoryHint=h('div','note-status','Saved summaries live only in data/learning.sqlite. You can revisit or delete them below.');
+  append(saveSection,summaryCopy,memoryTitle,memoryInput,saveMemory,memoryHint);
+
+  const historyHead=h('div','tutor-memory-history-head');
+  append(historyHead,h('strong','','SAVED SESSION MEMORY'),h('span','','0 ENTRIES'));
+  const historyList=h('div','tutor-memory-list');
+  saveSection.append(historyHead,historyList);
+
+  function formatMemoryDate(iso){ try{return new Intl.DateTimeFormat('en-GB',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}).format(new Date(iso)).toUpperCase();}catch{return '';} }
+  function renderMemoryHistory(){
+    historyList.replaceChildren();
+    historyHead.querySelector('span').textContent=`${memoryEntries.length} ENTR${memoryEntries.length===1?'Y':'IES'}`;
+    if(!memoryEntries.length){ historyList.append(h('div','tutor-memory-empty','No saved tutor sessions for this lesson yet.')); return; }
+    for(const entry of memoryEntries){
+      const details=h('details','tutor-memory-entry'), summary=h('summary',''), summaryCopyWrap=h('div','tutor-memory-summary-copy');
+      append(summaryCopyWrap,h('strong','',entry.title || 'Tutor session'),h('span','',formatMemoryDate(entry.created_at)));
+      summary.append(summaryCopyWrap); details.append(summary);
+      const body=h('div','tutor-memory-entry-body'), pre=h('pre','',entry.body || '');
+      const actions=h('div','tutor-memory-entry-actions');
+      const copy=h('button','action-btn secondary','COPY MEMORY'); copy.addEventListener('click',async()=>{await copyText(entry.body||'');showToast('Tutor memory copied.');});
+      const del=h('button','action-btn secondary danger-action','DELETE'); del.addEventListener('click',async()=>{ if(!confirm('Delete this saved tutor-memory entry?')) return; await api(`/api/tutor-memory/${entry.id}`,{method:'DELETE'}); memoryEntries=memoryEntries.filter(x=>x.id!==entry.id); if(state.lessonTutor) state.lessonTutor.tutorMemory=memoryEntries; refreshMemoryStatus(); renderMemoryHistory(); showToast('Tutor memory deleted.'); });
+      append(actions,copy,del); append(body,pre,actions); details.append(body); historyList.append(details);
+    }
+  }
+  saveMemory.addEventListener('click',async()=>{
+    const body=memoryInput.value.trim(); if(!body) return showToast('Paste the ChatGPT session summary first.');
+    const out=await api('/api/tutor-memory',{method:'POST',body:JSON.stringify({lessonId:m.id,title:memoryTitle.value.trim(),body})});
+    memoryEntries=[out.entry,...memoryEntries]; if(state.lessonTutor) state.lessonTutor.tutorMemory=memoryEntries;
+    memoryInput.value=''; memoryTitle.value=''; refreshMemoryStatus(); renderMemoryHistory(); showToast('Tutor session saved locally.');
+  });
+  renderMemoryHistory();
+  tutorBody.append(saveSection);
 
   tutorPanel.append(tutorBody); append(tutorModal,tutorBackdrop,tutorPanel); document.body.append(tutorModal);
   function openTutor(focusAsk=false){ modal.hidden=true; tutorModal.hidden=false; document.body.classList.add('lesson-modal-open'); if(focusAsk) setTimeout(()=>askInput.focus(),0); }
@@ -398,7 +460,7 @@ async function renderLesson(id) {
   tutorTrigger.addEventListener('click',()=>openTutor(false)); tutorClose.addEventListener('click',closeTutor); tutorBackdrop.addEventListener('click',closeTutor);
   const tutorNav=h('button','','TUTOR'); tutorNav.addEventListener('click',()=>openTutor(false)); sideNav.append(tutorNav);
 
-  state.lessonTutor={meta:m,course,blocks:lesson.blocks};
+  state.lessonTutor={meta:m,course,blocks:lesson.blocks,tutorMemory:memoryEntries};
   state.lessonUi={openModal,closeModal,toggleSidebar,openTutor,closeTutor};
 
   append(layout,side,article); page.append(layout); app.replaceChildren(page); window.scrollTo(0,0);

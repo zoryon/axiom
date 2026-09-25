@@ -597,3 +597,32 @@ body.lesson-modal-open { overflow:hidden; }
   .tutor-local-note { display:block; }
   .tutor-local-note strong { display:block; margin-bottom:7px; }
 }
+
+
+/* Tutor memory ------------------------------------------------------------ */
+.tutor-memory-title {
+  width:100%; margin-top:14px; border:1px solid var(--line-strong); background:var(--bg); color:var(--ink);
+  border-radius:11px; padding:12px 14px; outline:none; font:12px/1.5 var(--sans);
+}
+.tutor-memory-title:focus { border-color:color-mix(in srgb,var(--accent) 62%,var(--line-strong)); box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 12%,transparent); background:var(--panel); }
+.tutor-memory-input { margin-top:10px; min-height:220px; }
+.tutor-memory-history-head { display:flex; justify-content:space-between; gap:20px; align-items:center; margin-top:30px; padding-top:22px; border-top:1px solid var(--line); }
+.tutor-memory-history-head strong,.tutor-memory-history-head span { font:8.5px var(--mono); letter-spacing:.09em; }
+.tutor-memory-history-head strong { color:var(--ink); }
+.tutor-memory-history-head span { color:var(--faint); }
+.tutor-memory-list { display:grid; gap:9px; margin-top:12px; }
+.tutor-memory-empty { border:1px dashed var(--line-strong); border-radius:12px; padding:18px; color:var(--muted); font-size:11.5px; line-height:1.6; }
+.tutor-memory-entry { border:1px solid var(--line); border-radius:12px; background:var(--panel); overflow:hidden; }
+.tutor-memory-entry > summary { list-style:none; cursor:pointer; padding:14px 16px; }
+.tutor-memory-entry > summary::-webkit-details-marker { display:none; }
+.tutor-memory-entry > summary::after { content:'+'; float:right; margin-top:-20px; color:var(--faint); font-family:var(--mono); }
+.tutor-memory-entry[open] > summary::after { content:'−'; }
+.tutor-memory-summary-copy { display:grid; gap:4px; padding-right:28px; }
+.tutor-memory-summary-copy strong { color:var(--ink); font-size:12px; font-weight:600; }
+.tutor-memory-summary-copy span { color:var(--faint); font:8px var(--mono); letter-spacing:.07em; }
+.tutor-memory-entry-body { border-top:1px solid var(--line); padding:15px 16px 16px; }
+.tutor-memory-entry-body pre { margin:0; white-space:pre-wrap; overflow-wrap:anywhere; color:var(--muted); font:11.5px/1.7 var(--sans); }
+.tutor-memory-entry-actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:14px; }
+.tutor-memory-entry-actions .action-btn { margin-top:0; }
+.danger-action { color:var(--danger-text)!important; border-color:var(--danger-border)!important; }
+.danger-action:hover { background:var(--danger-surface)!important; }

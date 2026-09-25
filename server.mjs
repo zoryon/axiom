@@ -214,7 +214,8 @@ async function api(req, res, url) {
     const note = db.prepare('SELECT body, updated_at FROM notes WHERE lesson_id = ?').get(id) || { body: '', updated_at: null };
     const tasks = db.prepare('SELECT task_id, done FROM task_state WHERE lesson_id = ?').all(id);
     const work = db.prepare('SELECT activity_id, activity_type, done FROM practice_state WHERE lesson_id = ?').all(id);
-    return json(res, 200, { lesson: publicLesson(lesson), progress, note,
+    const tutorMemory = db.prepare('SELECT id, lesson_id, title, body, created_at, updated_at FROM tutor_memory WHERE lesson_id = ? ORDER BY created_at DESC, id DESC').all(id);
+    return json(res, 200, { lesson: publicLesson(lesson), progress, note, tutorMemory,
       tasks: Object.fromEntries(tasks.map(t => [t.task_id, !!t.done])),
       activities: Object.fromEntries(work.map(t => [`${t.activity_type}::${t.activity_id}`, !!t.done]))
     });
@@ -269,6 +270,25 @@ async function api(req, res, url) {
     db.prepare(`INSERT INTO notes (lesson_id, body, updated_at) VALUES (?, ?, ?)
       ON CONFLICT(lesson_id) DO UPDATE SET body=excluded.body, updated_at=excluded.updated_at`).run(body.lessonId, String(body.body || ''), now);
     return json(res, 200, { ok: true, updatedAt: now });
+  }
+  if (method === 'POST' && url.pathname === '/api/tutor-memory') {
+    const body = await readJson(req); if (!lessonById(body.lessonId)) return fail(res, 404, 'Lesson not found');
+    const memoryBody = String(body.body || '').trim();
+    if (!memoryBody) return fail(res, 422, 'Tutor memory cannot be empty');
+    if (memoryBody.length > 60000) return fail(res, 422, 'Tutor memory entry is too large (60,000 character limit)');
+    const now = new Date().toISOString();
+    const title = String(body.title || '').trim().slice(0, 160) || `Tutor session · ${new Date().toLocaleDateString('en-CA')}`;
+    const result = db.prepare('INSERT INTO tutor_memory (lesson_id, title, body, created_at, updated_at) VALUES (?, ?, ?, ?, ?)').run(body.lessonId, title, memoryBody, now, now);
+    const entry = db.prepare('SELECT id, lesson_id, title, body, created_at, updated_at FROM tutor_memory WHERE id = ?').get(Number(result.lastInsertRowid));
+    return json(res, 200, { ok: true, entry });
+  }
+  if (method === 'DELETE' && url.pathname.startsWith('/api/tutor-memory/')) {
+    const memoryId = Number(decodeURIComponent(url.pathname.slice('/api/tutor-memory/'.length)));
+    if (!Number.isInteger(memoryId) || memoryId <= 0) return fail(res, 422, 'Invalid tutor memory id');
+    const existing = db.prepare('SELECT id FROM tutor_memory WHERE id = ?').get(memoryId);
+    if (!existing) return fail(res, 404, 'Tutor memory entry not found');
+    db.prepare('DELETE FROM tutor_memory WHERE id = ?').run(memoryId);
+    return json(res, 200, { ok: true });
   }
   if (method === 'GET' && url.pathname === '/api/record') {
     const lessons = loadAll(courses); const progress = getProgressMap(db); const practice = buildPractice(lessons, progress, courses);
